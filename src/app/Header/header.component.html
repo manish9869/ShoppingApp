@@ -1,0 +1,71 @@
+<mat-sidenav-container fullscreen>
+  <mat-sidenav mode="side" #sidenav position="start">
+    <mat-nav-list>
+      <span *ngFor="let item of menu">
+        <span *ngIf="item.children && item.children.length > 0">
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <!-- Cabeceras del submenu -->
+                  <div fxLayout="row" fxLayoutAlign="space-between center" class="sideMenuText">
+                    <mat-icon>{{item.iconName}}</mat-icon>
+                    <span class="sideMenuText">{{item.displayName}}</span>
+                  </div>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <span *ngFor="let child of item.children">
+                <mat-list-item>
+                  <!-- Entradas de cada submenú  -->
+                  <div fxLayout="row" fxLayoutAlign="space-between center" class="sideMenuText">
+                    <mat-icon>{{child.iconName}}</mat-icon>
+                    {{child.displayName}}
+                  </div>
+                </mat-list-item>
+              </span>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </span>
+        <span *ngIf="!item.children || item.children.length === 0">
+          <mat-list-item>
+            <!-- Entradas principales -->
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="sideMenuText">
+              <mat-icon>{{item.iconName}}</mat-icon>
+              {{item.displayName}}
+            </div>
+          </mat-list-item>
+        </span>
+      </span>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      My Application
+      <span class="toolbar-spacer"></span>
+      <button mat-button [matMenuTriggerFor]="menulist">My Account</button>
+      <mat-menu #menulist="matMenu" xPosition="before">
+        <button mat-menu-item [matMenuTriggerFor]="SecondMenu">
+          <mat-icon>account_box</mat-icon>
+          Profile
+        </button>
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          Settings
+        </button>
+        <button mat-menu-item>
+          <mat-icon>exit_to_app</mat-icon>
+          Logout
+        </button>
+      </mat-menu>
+      <mat-menu #SecondMenu="matMenu">
+        <button mat-menu-item>
+          Sub Menu
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
