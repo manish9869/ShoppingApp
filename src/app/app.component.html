@@ -1,4 +1,18 @@
+<<<<<<< HEAD
 <app-header *ngIf="IsAdminLogin" ></app-header>
 
 test change from local gdfgdfgdfgfgdfgdfgdfdgfdgf
 <app-main-nav></app-main-nav>
+=======
+<app-header *ngIf="IsAdminLogin">
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</app-header>
+
+<app-main-nav *ngIf="!IsAdminLogin">
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</app-main-nav>
+>>>>>>> af6a8808707e96c9886144f56b2b79ec93851365
