@@ -1,1 +1,2 @@
-<app-header></app-header>
+<app-header *ngIf="IsAdminLogin" ></app-header>
+<app-cutomer-header *ngIf="!IsAdminLogin"></app-cutomer-header>
