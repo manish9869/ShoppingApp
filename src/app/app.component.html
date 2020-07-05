@@ -1,5 +1,11 @@
-<app-header *ngIf="IsAdminLogin" ></app-header>
-<!-- <app-cutomer-header *ngIf="!IsAdminLogin"></app-cutomer-header> -->
+<app-header *ngIf="IsAdminLogin">
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</app-header>
 
-
-<app-main-nav></app-main-nav>
+<app-main-nav *ngIf="!IsAdminLogin">
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</app-main-nav>

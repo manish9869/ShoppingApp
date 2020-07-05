@@ -29,3 +29,21 @@ text-decoration: none;
 }
 
 
+
+mat-icon{
+  padding: 5px;
+}
+
+.main-content {
+  padding:20px;
+}
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.sideMenuText{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
