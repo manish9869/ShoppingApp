@@ -13,10 +13,8 @@ const normalizePort = val => {
     // port number
     return port;
   }
-
   return false;
 };
-
 const onError = error => {
   if (error.syscall !== "listen") {
     throw error;
