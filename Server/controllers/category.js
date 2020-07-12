@@ -40,3 +40,62 @@ exports.getAllCategory = (req, res, next) => {
     });
   });
 };
+
+exports.getSingleCategory = (req, res, next) => {
+  CategoryData.findById(req.params.id)
+    .then((result) => {
+      if (result) {
+        res.status(200).json({
+          message: "Categpry fetched successfully!",
+          categoryData: result,
+        });
+      } else {
+        res.status(404).json({ message: "Category not found!" });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: "Fetching Category failed!",
+      });
+    });
+};
+
+exports.updateCategory = (req, res, next) => {
+  const category = new CategoryData({
+    _id: req.body._id,
+    categoryName: req.body.categoryName,
+    categoryDescription: req.body.categoryDescription,
+  });
+
+  CategoryData.updateOne({ _id: req.params.id }, category)
+    .then((result) => {
+      if (result.nModified > 0) {
+        res.status(200).json({ message: "Update successful!" });
+      } else {
+        res.status(401).json({ message: "Not authorized!" });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: "Couldn't udpate post!",
+      });
+    });
+};
+
+exports.deleteCategory = (req, res, next) => {
+  CategoryData.deleteOne({ _id: req.params.id })
+  .then((result) => {
+    console.log(result);
+    if (result.n > 0) {
+      res.status(200).json({ message: "Deletion successful!" });
+    } else {
+      res.status(401).json({ message: "Not authorized!" });
+    }
+  })
+  .catch((error) => {
+    res.status(500).json({
+      message: "Deleting posts failed!",
+    });
+  });
+
+};

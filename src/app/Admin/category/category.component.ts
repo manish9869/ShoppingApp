@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { CategoryService } from '../services/category.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ToastrService } from 'ngx-toastr';
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-category',
@@ -13,17 +14,24 @@ import { ToastrService } from 'ngx-toastr';
 export class CategoryComponent implements OnInit {
   constructor(public categoryService: CategoryService, public toastr: ToastrService) { }
   private mode = 'create';
+  Category: CategoryData;
   CategoryList: CategoryData[];
-  //CategoryList: CategoryData[] = [{ _id: 'test', CateoryName: 'test', CategoryDescription: 'test ' }];
-
+  private CategoryId: string;
   private categorysSub: Subscription;
-
+  form: FormGroup;
   ngOnInit() {
 
     this.resetForm();
 
     this.getCategoryList();
 
+
+    this.form = new FormGroup({
+      CategoryName: new FormControl(null, {
+        validators: [Validators.required, Validators.minLength(3)]
+      }),
+      CategoryDescription: new FormControl(null, { validators: [Validators.required] })
+    });
   }
 
 
@@ -37,16 +45,16 @@ export class CategoryComponent implements OnInit {
       });
   }
 
-  onSaveCategory(form?: NgForm) {
-    if (form.invalid) {
+  onSaveCategory() {
+    if (this.form.invalid) {
       return;
     }
 
     if (this.mode === 'create') {
       this.categoryService
-        .createCategory(form.value.CategoryName, form.value.CategoryDescription).subscribe(
+        .createCategory(this.form.value.CategoryName, this.form.value.CategoryDescription).subscribe(
           (result) => {
-            this.resetForm(form);
+            this.resetForm();
 
             this.getCategoryList();
 
@@ -56,35 +64,60 @@ export class CategoryComponent implements OnInit {
 
           }
         );
-
-
     } else {
 
+      this.categoryService.updateCourseDb(this.CategoryId, this.form.value.CategoryName, this.form.value.CategoryDescription)
+        .subscribe(result => {
+          this.resetForm();
+
+          this.getCategoryList();
+          this.toastr.info('Record updated succesfully');
+        })
     }
+  }
+
+  onDelete(Categoryid: string) {
+
+    this.categoryService.deleteCategory(Categoryid)
+      .subscribe(result => {
+        this.resetForm();
+        this.getCategoryList();
+        this.toastr.error('Record Deleted succesfully');
+      });
 
 
   }
 
-  onDelete(id: string, form: NgForm) {
+  onEdit(Categoryid: string) {
 
+    this.mode = 'edit';
+    this.CategoryId = Categoryid;
+
+    this.categoryService
+      .getSingleCourseListdb(Categoryid).subscribe(
+        (result) => {
+          this.Category = {
+            _id: result.categoryData._id,
+            categoryName: result.categoryData.categoryName,
+            categoryDescription: result.categoryData.categoryDescription
+          };
+          this.form.setValue({
+            CategoryName: this.Category.categoryName,
+            CategoryDescription: this.Category.categoryDescription
+          });
+        },
+        (error) => {
+
+        }
+      );
   }
 
-  onEdit(categoryData: CategoryData) {
+  resetForm() {
+    if (this.form != null)
 
-
-  }
-
-  resetForm(form?: NgForm) {
-
-    if (form != null)
-
-      form.reset();
-
+      this.form.reset();
     this.getCategoryList();
-
-
   }
-
 
 
 }
