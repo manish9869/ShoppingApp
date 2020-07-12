@@ -1,6 +1,5 @@
 import { CategoryData } from './../category-data.model';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { CategoryService } from '../services/category.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ToastrService } from 'ngx-toastr';

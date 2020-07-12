@@ -15,43 +15,43 @@ export class HeaderComponent implements OnInit {
 
 
   menu: NavItem [] = [
+    // {
+    //   displayName: 'Category Managment',
+    //   iconName: 'desktop_windows',
+    //   route: '/admin/Category',
+    // },
+    // {
+    //   displayName: 'Sub Category',
+    //   iconName: 'ballot',
+    //   route: '/admin/SubCategory',
+    // },
     {
-      displayName: 'Category Managment',
-      iconName: 'desktop_windows',
-      route: '/admin/Category',
-    },
-    {
-      displayName: 'Sub Category',
-      iconName: 'ballot',
-      route: '/admin/SubCategory',
-    },
-    {
-      displayName: 'Expedientes',
+      displayName: 'Master Menu',
       iconName: 'description',
       children: [
         {
-          displayName: 'Mis Expedientes',
+          displayName: 'Category Managment',
           iconName: 'how_to_reg',
-          route: '/misexpedientes'
+          route: '/admin/Category'
         },
         {
-          displayName: 'Todos',
+          displayName: 'Sub Category',
           iconName: 'waves',
-          route: '/todos'
+          route: '/admin/SubCategory'
         }
       ]
     },
-    {
-      displayName: 'Perfiles',
-      iconName: 'group',
-      children: [
-          {
-            displayName: 'Búsqueda Perfil',
-            iconName: 'search',
-            route: '/busquedaperfiles'
-          }
-        ]
-      }
+    // {
+    //   displayName: 'Perfiles',
+    //   iconName: 'group',
+    //   children: [
+    //       {
+    //         displayName: 'Búsqueda Perfil',
+    //         iconName: 'search',
+    //         route: '/busquedaperfiles'
+    //       }
+    //     ]
+    //   }
   ];
 
 }
