@@ -1,10 +1,10 @@
 const CategoryData = require("../models/categoryModel");
 
-exports.insertCategory = (req, res) => {
+exports.insertCategory = (req, res,next) => {
   console.log(req);
   const category = new CategoryData({
-    categoryName: req.body.categoryName,
-    categoryDescription: req.body.categoryDescription,
+    categoryName: req.body.CateoryName,
+    categoryDescription: req.body.CategoryDescription,
   });
 
   category
