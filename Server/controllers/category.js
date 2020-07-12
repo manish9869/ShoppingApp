@@ -1,4 +1,4 @@
-const CategoryData = require("../models/categoryModel");
+const CategoryData = require("../models/category");
 
 exports.insertCategory = (req, res,next) => {
   console.log(req);
@@ -22,4 +22,21 @@ exports.insertCategory = (req, res,next) => {
         message: "Some error Occurd",
       });
     });
+};
+
+exports.getAllCategory = (req, res, next) => {
+  const CategoryDataQuery = CategoryData.find();
+
+  CategoryDataQuery.then((documents) => {
+    res.status(200).json({
+      message: "Categpry fetched successfully!",
+      categoryData: documents,
+    });
+  }).catch((error) => {
+    console.log(error);
+
+    res.status(500).json({
+      message: "Fetching Categpry failed!",
+    });
+  });
 };

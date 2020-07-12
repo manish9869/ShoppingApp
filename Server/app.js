@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const userRoutes = require("./routes/user");
-const CategoryRoutes = require("./routes/categoryRoute");
+const CategoryRoutes = require("./routes/category");
 
 const app = express();
 
