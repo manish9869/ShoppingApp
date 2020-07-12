@@ -16,14 +16,14 @@ export class HeaderComponent implements OnInit {
 
   menu: NavItem [] = [
     {
-      displayName: 'Escritorio',
+      displayName: 'Category Managment',
       iconName: 'desktop_windows',
-      route: 'escritorio',
+      route: '/admin/Category',
     },
     {
-      displayName: 'Entradas GADE',
+      displayName: 'Sub Category',
       iconName: 'ballot',
-      route: 'entradasGADE',
+      route: '/admin/SubCategory',
     },
     {
       displayName: 'Expedientes',

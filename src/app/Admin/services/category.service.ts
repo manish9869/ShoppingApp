@@ -29,6 +29,8 @@ export class CategoryService {
 
 
 
+
+
   getCategoryUpdateListener() {
     return this.categoryDataUpdated.asObservable();
   }
@@ -47,6 +49,32 @@ export class CategoryService {
         });
       });
   }
+
+
+
+  getSingleCourseListdb(id: string) {
+    return this.http
+      .get<{ message: string; categoryData: CategoryData; }>(
+        BACKEND_URL + '/' + id
+      );
+
+  }
+
+  updateCourseDb(categoryid: string, categoryName: string, categoryDescrition: string) {
+
+    const CategoryData: CategoryData = {
+      _id: categoryid,
+      categoryName: categoryName,
+      categoryDescription: categoryDescrition
+    }
+
+    return this.http.put(BACKEND_URL + '/' + categoryid, CategoryData);
+
+  }
+
+deleteCategory(categoryid: string){
+return this.http.delete(BACKEND_URL + '/' + categoryid);
+}
 
 
 }

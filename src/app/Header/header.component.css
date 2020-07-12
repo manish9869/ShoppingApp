@@ -1,14 +1,14 @@
+
+
 mat-sidenav {
   width: 280px;
   padding:15px;
 }
-.mat-drawer {
 
-
-}
 
 mat-icon{
   padding: 5px;
+  box-sizing: initial;
 }
 
 .main-content {

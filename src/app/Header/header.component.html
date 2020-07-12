@@ -6,17 +6,14 @@
           <mat-accordion>
             <mat-expansion-panel>
               <mat-expansion-panel-header>
-                <mat-panel-title>
-                  <!-- Cabeceras del submenu -->
                   <div fxLayout="row" fxLayoutAlign="space-between center" class="sideMenuText">
                     <mat-icon>{{item.iconName}}</mat-icon>
-                    <span class="sideMenuText">{{item.displayName}}</span>
+                    <span class="sideMenuText" >tetss</span>
                   </div>
-                </mat-panel-title>
               </mat-expansion-panel-header>
               <span *ngFor="let child of item.children">
                 <mat-list-item>
-                  <!-- Entradas de cada submenú  -->
+
                   <div fxLayout="row" fxLayoutAlign="space-between center" class="sideMenuText">
                     <mat-icon>{{child.iconName}}</mat-icon>
                     {{child.displayName}}
@@ -27,7 +24,7 @@
           </mat-accordion>
         </span>
         <span *ngIf="!item.children || item.children.length === 0">
-          <mat-list-item>
+          <mat-list-item [routerLink]="item.route">
             <!-- Entradas principales -->
             <div fxLayout="row" fxLayoutAlign="space-between center" class="sideMenuText">
               <mat-icon>{{item.iconName}}</mat-icon>
