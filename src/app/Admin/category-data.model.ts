@@ -1,6 +1,7 @@
-export interface CategoryData{
-  CateoryName:string;
-  CategoryDescription:string;
+export interface CategoryData {
+  _id: string;
+  categoryName: string;
+  categoryDescription: string;
 
 
 }

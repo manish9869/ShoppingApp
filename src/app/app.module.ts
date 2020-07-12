@@ -10,7 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { AngularRoutingModule } from './app-routing.module';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -27,10 +27,12 @@ import { LayoutModule } from '@angular/cdk/layout';
     AngularRoutingModule,
     LayoutModule,
     HttpClientModule,
+    ToastrModule.forRoot()
 
 
   ],
   providers: [],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

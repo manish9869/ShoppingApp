@@ -1,25 +1,52 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Router } from "@angular/router";
-import { debugOutputAstAsTypeScript } from "@angular/compiler";
-import { CategoryData } from "../category-data.model";
-import { environment } from "src/environments/environment";
+import { CategoryData } from './../category-data.model';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
-const BACKEND_URL = environment.apiUrl + "/category";
+import { Subject } from 'rxjs';
 
-@Injectable({ providedIn: "root" })
+const BACKEND_URL = environment.apiUrl + '/category';
+
+@Injectable({ providedIn: 'root' })
 export class CategoryService {
-  constructor(public http: HttpClient, public router: Router) {}
+  constructor(public http: HttpClient, public router: Router) { }
+
+
+  private categoryData: CategoryData[] = [];
+  private categoryDataUpdated = new Subject<{ categoryData: CategoryData[]; }>();
+
 
   createCategory(categoryName: string, categoryDescrition: string) {
     const categoryData: CategoryData = {
-      CateoryName: categoryName,
-      CategoryDescription: categoryDescrition,
+      _id: null,
+      categoryName: categoryName,
+      categoryDescription: categoryDescrition,
     };
 
-    this.http.post(BACKEND_URL + "/addcategory", categoryData).subscribe(
-      (result) => {},
-      (error) => {}
-    );
+    return this.http.post(BACKEND_URL + '/addcategory', categoryData);
   }
+
+
+
+  getCategoryUpdateListener() {
+    return this.categoryDataUpdated.asObservable();
+  }
+
+
+
+  getCourseListdb() {
+    this.http
+      .get<{ message: string; categoryData: any; }>(
+        BACKEND_URL
+      )
+      .subscribe(transformedPostData => {
+        this.categoryData = transformedPostData.categoryData;
+        this.categoryDataUpdated.next({
+          categoryData: [...this.categoryData]
+        });
+      });
+  }
+
+
 }
