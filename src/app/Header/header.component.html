@@ -6,13 +6,15 @@
           <mat-accordion>
             <mat-expansion-panel>
               <mat-expansion-panel-header>
+                <mat-list-item>
                   <div fxLayout="row" fxLayoutAlign="space-between center" class="sideMenuText">
                     <mat-icon>{{item.iconName}}</mat-icon>
-                    <span class="sideMenuText" >tetss</span>
+                    <span class="sideMenuText">{{item.displayName}}</span>
                   </div>
+                </mat-list-item>
               </mat-expansion-panel-header>
               <span *ngFor="let child of item.children">
-                <mat-list-item>
+                <mat-list-item [routerLink]="child.route">
 
                   <div fxLayout="row" fxLayoutAlign="space-between center" class="sideMenuText">
                     <mat-icon>{{child.iconName}}</mat-icon>
