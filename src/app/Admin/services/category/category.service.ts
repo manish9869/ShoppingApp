@@ -24,19 +24,12 @@ export class CategoryService {
       categoryName: categoryName,
       categoryDescription: categoryDescrition,
     };
-
     return this.http.post(BACKEND_URL + '/addcategory', categoryData);
   }
-
-
-
-
 
   getCategoryUpdateListener() {
     return this.categoryDataUpdated.asObservable();
   }
-
-
 
   getCourseListdb() {
     this.http
@@ -51,26 +44,20 @@ export class CategoryService {
       });
   }
 
-
-
   getSingleCourseListdb(id: string) {
     return this.http
       .get<{ message: string; categoryData: CategoryData; }>(
         BACKEND_URL + '/' + id
       );
-
   }
 
   updateCourseDb(categoryid: string, categoryName: string, categoryDescrition: string) {
-
     const CategoryData: CategoryData = {
       _id: categoryid,
       categoryName: categoryName,
       categoryDescription: categoryDescrition
     }
-
     return this.http.put(BACKEND_URL + '/' + categoryid, CategoryData);
-
   }
 
   deleteCategory(categoryid: string) {
