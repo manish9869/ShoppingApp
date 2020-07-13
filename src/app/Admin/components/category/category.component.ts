@@ -1,16 +1,18 @@
-import { CategoryData } from './../category-data.model';
-import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '../services/category.service';
+
+import { Component, OnInit, OnDestroy } from '@angular/core';
+
 import { Subscription } from 'rxjs/internal/Subscription';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { CategoryData } from '../../services/category/category-data.model';
+import { CategoryService } from '../../services/category/category.service';
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css'],
 })
-export class CategoryComponent implements OnInit {
+export class CategoryComponent implements OnInit, OnDestroy {
   constructor(public categoryService: CategoryService, public toastr: ToastrService) { }
   private mode = 'create';
   Category: CategoryData;
@@ -37,6 +39,7 @@ export class CategoryComponent implements OnInit {
 
   getCategoryList() {
     this.categoryService.getCourseListdb();
+
     this.categorysSub = this.categoryService
       .getCategoryUpdateListener()
       .subscribe(result => {
@@ -71,7 +74,7 @@ export class CategoryComponent implements OnInit {
 
           this.getCategoryList();
           this.toastr.info('Record updated succesfully');
-        })
+        });
     }
   }
 
@@ -118,5 +121,8 @@ export class CategoryComponent implements OnInit {
     this.getCategoryList();
   }
 
+  ngOnDestroy() {
+    this.categorysSub.unsubscribe();
+  }
 
 }

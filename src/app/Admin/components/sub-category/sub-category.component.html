@@ -9,13 +9,11 @@
 
             <div class="form-group">
 
-              <select formControlName="CategpryDdl" [(ngModel)]="selectedLevel" class="form-control"
+              <select formControlName="CategpryDdl" [(ngModel)]="selectedDropdownvalue" class="form-control"
                 (change)="changeCategorydata()">
                 <option value="undefined" selected disabled>Select option</option>
-
                 <option *ngFor="let item of CategoryList" [ngValue]="item">
-                  {{item.CategoryName}}
-
+                  {{item.categoryName}}
                 </option>
               </select>
               <div *ngIf="CategpryDropdownControl.CategpryDdl.touched && CategpryDropdownControl.CategpryDdl.invalid"
