@@ -1,10 +1,11 @@
-import { CategoryData } from './../category-data.model';
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 import { Subject } from 'rxjs';
+import { CategoryData } from './category-data.model';
 
 const BACKEND_URL = environment.apiUrl + '/category';
 
@@ -72,9 +73,9 @@ export class CategoryService {
 
   }
 
-deleteCategory(categoryid: string){
-return this.http.delete(BACKEND_URL + '/' + categoryid);
-}
+  deleteCategory(categoryid: string) {
+    return this.http.delete(BACKEND_URL + '/' + categoryid);
+  }
 
 
 }

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CategoryComponent } from './category/category.component';
-import { SubCategoryComponent } from './sub-category/sub-category.component';
-import { ProductComponent } from './product/product.component';
+import { CategoryComponent } from './components/category/category.component';
+import { SubCategoryComponent } from './components/sub-category/sub-category.component';
+import { ProductComponent } from './components/product/product.component';
 
 const routes: Routes = [
   { path: 'Category', component: CategoryComponent },
@@ -15,4 +15,4 @@ const routes: Routes = [
 
   exports: [RouterModule],
 })
-export class AdminRoutingModule {}
+export class AdminRoutingModule { }
