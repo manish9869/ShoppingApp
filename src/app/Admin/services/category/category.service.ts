@@ -23,6 +23,11 @@ export class CategoryService {
       _id: null,
       categoryName: categoryName,
       categoryDescription: categoryDescrition,
+      IsActive:true,
+      EnteredBy: null,
+      WhenEntered: new Date(),
+      ModifiedBy: null,
+      WhenModified: null,
     };
     return this.http.post(BACKEND_URL + '/addcategory', categoryData);
   }
@@ -55,8 +60,13 @@ export class CategoryService {
     const CategoryData: CategoryData = {
       _id: categoryid,
       categoryName: categoryName,
-      categoryDescription: categoryDescrition
-    }
+      categoryDescription: categoryDescrition,
+      IsActive:true,
+      EnteredBy: null,
+      WhenEntered: null,
+      ModifiedBy: null,
+      WhenModified: new Date(),
+    };
     return this.http.put(BACKEND_URL + '/' + categoryid, CategoryData);
   }
 
