@@ -1,10 +1,15 @@
 const CategoryData = require("../models/category");
 
 exports.insertCategory = (req, res,next) => {
-  console.log(req);
+  console.log(req.body);
   const category = new CategoryData({
-    categoryName: req.body.CateoryName,
-    categoryDescription: req.body.CategoryDescription,
+    categoryName: req.body.categoryName,
+    categoryDescription: req.body.categoryDescription,
+    IsActive:req.body.IsActive,
+    EnteredBy:req.body.EnteredBy,
+    WhenEntered:req.body.WhenEntered,
+    ModifiedBy:req.body.ModifiedBy,
+    WhenModified:req.body.WhenModified,
   });
 
   category
@@ -65,6 +70,8 @@ exports.updateCategory = (req, res, next) => {
     _id: req.body._id,
     categoryName: req.body.categoryName,
     categoryDescription: req.body.categoryDescription,
+    ModifiedBy:req.body.ModifiedBy,
+    WhenModified:req.body.WhenModified
   });
 
   CategoryData.updateOne({ _id: req.params.id }, category)

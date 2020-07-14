@@ -101,7 +101,12 @@ export class CategoryComponent implements OnInit, OnDestroy {
           this.Category = {
             _id: result.categoryData._id,
             categoryName: result.categoryData.categoryName,
-            categoryDescription: result.categoryData.categoryDescription
+            categoryDescription: result.categoryData.categoryDescription,
+            IsActive:true,
+            EnteredBy:null,
+            WhenEntered:null,
+            ModifiedBy:null,
+            WhenModified:null
           };
           this.form.setValue({
             CategoryName: this.Category.categoryName,

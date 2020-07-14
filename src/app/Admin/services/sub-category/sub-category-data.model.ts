@@ -3,5 +3,10 @@ export interface SubCategoryData {
   categoryId: string;
   subCategoryName: string;
   subCategoryDescription: string;
+  IsActive:boolean;
+  EnteredBy:string;
+  WhenEntered:Date;
+  ModifiedBy:string;
+  WhenModified:Date;
 
 }

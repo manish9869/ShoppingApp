@@ -2,7 +2,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { CategoryService } from '../../services/category/category.service';
+import { SubCategoryService } from '../../services/sub-category/subcategory.service';
+import { SubCategoryData } from '../../services/sub-category/sub-category-data.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sub-category',
@@ -13,11 +15,12 @@ export class SubCategoryComponent implements OnInit, OnDestroy {
   selectedDropdownvalue;
 
   CategoryList: any = [];
-
+  private SubCategoryId: string;
+  private mode = 'create';
   private categorysSub: Subscription;
   SubCategoryList;
   form: FormGroup;
-  constructor(public categoryService: CategoryService) { }
+  constructor(public categoryService: SubCategoryService,public toastr: ToastrService) { }
 
   ngOnInit() {
 
@@ -33,11 +36,11 @@ export class SubCategoryComponent implements OnInit, OnDestroy {
       })
     });
 
-    this.categoryService.getCourseListdb();
-    this.categorysSub = this.categoryService.getCategoryUpdateListener()
-      .subscribe(result => {
-        this.CategoryList = result.categoryData;
-      });
+    // this.categoryService.getCourseListdb();
+    // this.categorysSub = this.categoryService.getCategoryUpdateListener()
+    //   .subscribe(result => {
+    //     this.CategoryList = result.categoryData;
+    //   });
   }
   get CategpryDropdownControl() {
     return this.form.controls;
@@ -48,7 +51,34 @@ export class SubCategoryComponent implements OnInit, OnDestroy {
   }
 
   onSaveSubCategory() {
+    if (this.form.invalid) {
+      return;
+    }
 
+    if (this.mode === 'create') {
+      this.categoryService
+        .createSubCategory(this.form.value.CategoryName, this.form.value.CategoryDescription).subscribe(
+          (result) => {
+            //this.resetForm();
+
+            //this.getCategoryList();
+
+            this.toastr.success('New Record Inserted');
+          },
+          (error) => {
+
+          }
+        );
+    } else {
+
+      // this.categoryService.updateCourseDb(this.SubCategoryId, this.form.value.CategoryName, this.form.value.CategoryDescription)
+      //   .subscribe(result => {
+      //     //this.resetForm();
+
+      //     //this.getCategoryList();
+      //     this.toastr.info('Record updated succesfully');
+      //   });
+    }
   }
 
   courseSelectedValue() {
