@@ -108,3 +108,30 @@ exports.deleteSubCategory = (req, res, next) => {
       });
     });
 };
+
+exports.updateStatus = (req, res, next) => {
+  //console.log(req.body);
+  const category = new SubCategoryData({
+    _id: req.body._id,
+    IsActive: req.body.IsActive,
+    ModifiedBy: req.body.ModifiedBy,
+    WhenModified: req.body.WhenModified,
+  });
+  console.log(req.params.id);
+  SubCategoryData.updateOne({ _id: req.params.id }, category)
+    .then((result) => {
+      if (result.nModified > 0) {
+        console.log("Update successful!");
+        res.status(200).json({ message: "Update successful!" });
+      } else {
+        console.log("Not authorized!");
+        res.status(401).json({ message: "Not authorized!" });
+      }
+    })
+    .catch((error) => {
+      console.log("Couldn't udpate post! " + error);
+      res.status(500).json({
+        message: "Couldn't udpate post!",
+      });
+    });
+};

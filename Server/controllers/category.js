@@ -46,6 +46,23 @@ exports.getAllCategory = (req, res, next) => {
   });
 };
 
+exports.getActiveCategory = (req, res, next) => {
+  const CategoryDataQuery = CategoryData.find({ IsActive: true });
+
+  CategoryDataQuery.then((documents) => {
+    res.status(200).json({
+      message: "Categpry fetched successfully!",
+      categoryData: documents,
+    });
+  }).catch((error) => {
+    console.log(error);
+
+    res.status(500).json({
+      message: "Fetching Categpry failed!",
+    });
+  });
+};
+
 exports.getSingleCategory = (req, res, next) => {
   CategoryData.findById(req.params.id)
     .then((result) => {

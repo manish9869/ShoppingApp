@@ -14,4 +14,6 @@ router.put("/:id", SubcategoryController.updateSubCategory);
 
 router.delete("/:id", SubcategoryController.deleteSubCategory);
 
+router.post("/updateStatus/:id", SubcategoryController.updateStatus);
+
 module.exports = router;
