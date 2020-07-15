@@ -1,6 +1,10 @@
 const CategoryData = require("../models/category");
 
 exports.insertCategory = (req, res, next) => {
+<<<<<<< HEAD
+=======
+  console.log(req.body);
+>>>>>>> 4624675b6722bee2129d20ad50a3b275adc4ce88
   const category = new CategoryData({
     categoryName: req.body.categoryName,
     categoryDescription: req.body.categoryDescription,
@@ -103,4 +107,34 @@ exports.deleteCategory = (req, res, next) => {
         message: "Deleting posts failed!",
       });
     });
+<<<<<<< HEAD
+=======
+};
+
+exports.updateStatus = (req, res, next) => {
+  //console.log(req.body);
+  const category = new CategoryData({
+    _id: req.body._id,
+    IsActive: req.body.IsActive,
+    ModifiedBy: req.body.ModifiedBy,
+    WhenModified: req.body.WhenModified,
+  });
+  console.log(category);
+  CategoryData.updateOne({ _id: req.params.id }, category)
+    .then((result) => {
+      if (result.nModified > 0) {
+        console.log("Update successful!");
+        res.status(200).json({ message: "Update successful!" });
+      } else {
+        console.log("Not authorized!");
+        res.status(401).json({ message: "Not authorized!" });
+      }
+    })
+    .catch((error) => {
+      console.log("Couldn't udpate post! " + error);
+      res.status(500).json({
+        message: "Couldn't udpate post!",
+      });
+    });
+>>>>>>> 4624675b6722bee2129d20ad50a3b275adc4ce88
 };
