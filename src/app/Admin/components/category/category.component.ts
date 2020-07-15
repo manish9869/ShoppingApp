@@ -1,25 +1,23 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { NgModule } from "@angular/core";
-import { Subscription } from "rxjs/internal/Subscription";
-import { ToastrService } from "ngx-toastr";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { CategoryData } from "../../services/category/category-data.model";
-import { CategoryService } from "../../services/category/category.service";
-import { MatSlideToggleChange } from "@angular/material";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { ToastrService } from 'ngx-toastr';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CategoryData } from '../../services/category/category-data.model';
+import { CategoryService } from '../../services/category/category.service';
+import { MatSlideToggleChange } from '@angular/material';
 
 @Component({
-  selector: "app-category",
-  templateUrl: "./category.component.html",
-  styleUrls: ["./category.component.css"],
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.css'],
 })
 export class CategoryComponent implements OnInit, OnDestroy {
   constructor(
     public categoryService: CategoryService,
     public toastr: ToastrService
-  ) {}
-  //color = "accent";
-  //checked = false;
-  private mode = "create";
+  ) { }
+
+  private mode = 'create';
   Category: CategoryData;
   CategoryList: CategoryData[];
   private CategoryId: string;
@@ -41,7 +39,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
   }
 
   onChange($event: MatSlideToggleChange, Categoryid: string) {
-    //console.log($event.checked);
+
     this.categoryService
       .UpdateCategoryStatus(Categoryid, $event.checked)
       .subscribe(
@@ -50,9 +48,9 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
           this.getCategoryList();
 
-          this.toastr.success("Status updated successfully.");
+          this.toastr.success('Status updated successfully.');
         },
-        (error) => {}
+        (error) => { }
       );
   }
 
@@ -71,7 +69,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (this.mode === "create") {
+    if (this.mode === 'create') {
       this.categoryService
         .createCategory(
           this.form.value.CategoryName,
@@ -83,9 +81,9 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
             this.getCategoryList();
 
-            this.toastr.success("New Record Inserted");
+            this.toastr.success('New Record Inserted');
           },
-          (error) => {}
+          (error) => { }
         );
     } else {
       this.categoryService
@@ -98,12 +96,8 @@ export class CategoryComponent implements OnInit, OnDestroy {
           this.resetForm();
 
           this.getCategoryList();
-<<<<<<< HEAD
           this.mode = 'create';
           this.toastr.info('Record updated succesfully');
-=======
-          this.toastr.info("Record updated succesfully");
->>>>>>> 4624675b6722bee2129d20ad50a3b275adc4ce88
         });
     }
   }
@@ -112,15 +106,14 @@ export class CategoryComponent implements OnInit, OnDestroy {
     this.categoryService.deleteCategory(Categoryid).subscribe((result) => {
       this.resetForm();
       this.getCategoryList();
-      this.toastr.error("Record Deleted succesfully");
+      this.toastr.error('Record Deleted succesfully');
     });
   }
 
   onEdit(Categoryid: string) {
-    this.mode = "edit";
+    this.mode = 'edit';
     this.CategoryId = Categoryid;
 
-<<<<<<< HEAD
     this.categoryService
       .getSingleCourseListdb(Categoryid).subscribe(
         (result) => {
@@ -150,32 +143,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
       this.form.reset();
       this.getCategoryList();
     }
-=======
-    this.categoryService.getSingleCourseListdb(Categoryid).subscribe(
-      (result) => {
-        this.Category = {
-          _id: result.categoryData._id,
-          categoryName: result.categoryData.categoryName,
-          categoryDescription: result.categoryData.categoryDescription,
-          IsActive: true,
-          EnteredBy: null,
-          WhenEntered: null,
-          ModifiedBy: null,
-          WhenModified: null,
-        };
-        this.form.setValue({
-          CategoryName: this.Category.categoryName,
-          CategoryDescription: this.Category.categoryDescription,
-        });
-      },
-      (error) => {}
-    );
-  }
-
-  resetForm() {
-    if (this.form != null) this.form.reset();
-    this.getCategoryList();
->>>>>>> 4624675b6722bee2129d20ad50a3b275adc4ce88
   }
 
   ngOnDestroy() {

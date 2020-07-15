@@ -1,10 +1,7 @@
 const CategoryData = require("../models/category");
 
 exports.insertCategory = (req, res, next) => {
-<<<<<<< HEAD
-=======
   console.log(req.body);
->>>>>>> 4624675b6722bee2129d20ad50a3b275adc4ce88
   const category = new CategoryData({
     categoryName: req.body.categoryName,
     categoryDescription: req.body.categoryDescription,
@@ -107,8 +104,6 @@ exports.deleteCategory = (req, res, next) => {
         message: "Deleting posts failed!",
       });
     });
-<<<<<<< HEAD
-=======
 };
 
 exports.updateStatus = (req, res, next) => {
@@ -136,5 +131,4 @@ exports.updateStatus = (req, res, next) => {
         message: "Couldn't udpate post!",
       });
     });
->>>>>>> 4624675b6722bee2129d20ad50a3b275adc4ce88
 };

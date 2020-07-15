@@ -1,16 +1,16 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Router } from "@angular/router";
-import { environment } from "src/environments/environment";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
-import { Subject } from "rxjs";
-import { CategoryData } from "./category-data.model";
+import { Subject } from 'rxjs';
+import { CategoryData } from './category-data.model';
 
-const BACKEND_URL = environment.apiUrl + "/category";
+const BACKEND_URL = environment.apiUrl + '/category';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class CategoryService {
-  constructor(public http: HttpClient, public router: Router) {}
+  constructor(public http: HttpClient, public router: Router) { }
 
   private categoryData: CategoryData[] = [];
   private categoryDataUpdated = new Subject<{ categoryData: CategoryData[] }>();
@@ -26,7 +26,7 @@ export class CategoryService {
       ModifiedBy: null,
       WhenModified: null,
     };
-    return this.http.post(BACKEND_URL + "/addcategory", categoryData);
+    return this.http.post(BACKEND_URL + '/addcategory', categoryData);
   }
 
   getCategoryUpdateListener() {
@@ -46,7 +46,7 @@ export class CategoryService {
 
   getSingleCourseListdb(id: string) {
     return this.http.get<{ message: string; categoryData: CategoryData }>(
-      BACKEND_URL + "/" + id
+      BACKEND_URL + '/' + id
     );
   }
 
@@ -65,11 +65,11 @@ export class CategoryService {
       ModifiedBy: null,
       WhenModified: new Date(),
     };
-    return this.http.put(BACKEND_URL + "/" + categoryid, CategoryData);
+    return this.http.put(BACKEND_URL + '/' + categoryid, CategoryData);
   }
 
   deleteCategory(categoryid: string) {
-    return this.http.delete(BACKEND_URL + "/" + categoryid);
+    return this.http.delete(BACKEND_URL + '/' + categoryid);
   }
 
   UpdateCategoryStatus(categoryid: string, status: boolean) {
@@ -84,7 +84,7 @@ export class CategoryService {
       WhenModified: new Date(),
     };
     return this.http.post(
-      BACKEND_URL + "/updateStatus" + "/" + categoryid,
+      BACKEND_URL + '/updateStatus' + '/' + categoryid,
       categoryData
     );
   }
