@@ -1,15 +1,15 @@
 const CategoryData = require("../models/category");
 
-exports.insertCategory = (req, res,next) => {
+exports.insertCategory = (req, res, next) => {
   console.log(req.body);
   const category = new CategoryData({
     categoryName: req.body.categoryName,
     categoryDescription: req.body.categoryDescription,
-    IsActive:req.body.IsActive,
-    EnteredBy:req.body.EnteredBy,
-    WhenEntered:req.body.WhenEntered,
-    ModifiedBy:req.body.ModifiedBy,
-    WhenModified:req.body.WhenModified,
+    IsActive: req.body.IsActive,
+    EnteredBy: req.body.EnteredBy,
+    WhenEntered: req.body.WhenEntered,
+    ModifiedBy: req.body.ModifiedBy,
+    WhenModified: req.body.WhenModified,
   });
 
   category
@@ -70,8 +70,8 @@ exports.updateCategory = (req, res, next) => {
     _id: req.body._id,
     categoryName: req.body.categoryName,
     categoryDescription: req.body.categoryDescription,
-    ModifiedBy:req.body.ModifiedBy,
-    WhenModified:req.body.WhenModified
+    ModifiedBy: req.body.ModifiedBy,
+    WhenModified: req.body.WhenModified,
   });
 
   CategoryData.updateOne({ _id: req.params.id }, category)
@@ -91,18 +91,44 @@ exports.updateCategory = (req, res, next) => {
 
 exports.deleteCategory = (req, res, next) => {
   CategoryData.deleteOne({ _id: req.params.id })
-  .then((result) => {
-    console.log(result);
-    if (result.n > 0) {
-      res.status(200).json({ message: "Deletion successful!" });
-    } else {
-      res.status(401).json({ message: "Not authorized!" });
-    }
-  })
-  .catch((error) => {
-    res.status(500).json({
-      message: "Deleting posts failed!",
+    .then((result) => {
+      console.log(result);
+      if (result.n > 0) {
+        res.status(200).json({ message: "Deletion successful!" });
+      } else {
+        res.status(401).json({ message: "Not authorized!" });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: "Deleting posts failed!",
+      });
     });
-  });
+};
 
+exports.updateStatus = (req, res, next) => {
+  //console.log(req.body);
+  const category = new CategoryData({
+    _id: req.body._id,
+    IsActive: req.body.IsActive,
+    ModifiedBy: req.body.ModifiedBy,
+    WhenModified: req.body.WhenModified,
+  });
+  console.log(category);
+  CategoryData.updateOne({ _id: req.params.id }, category)
+    .then((result) => {
+      if (result.nModified > 0) {
+        console.log("Update successful!");
+        res.status(200).json({ message: "Update successful!" });
+      } else {
+        console.log("Not authorized!");
+        res.status(401).json({ message: "Not authorized!" });
+      }
+    })
+    .catch((error) => {
+      console.log("Couldn't udpate post! " + error);
+      res.status(500).json({
+        message: "Couldn't udpate post!",
+      });
+    });
 };
