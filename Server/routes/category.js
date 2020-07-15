@@ -14,5 +14,6 @@ router.put("/:id", categoryController.updateCategory);
 
 router.delete("/:id", categoryController.deleteCategory);
 
+router.post("/updateStatus/:id", categoryController.updateStatus);
 
 module.exports = router;
