@@ -10,9 +10,9 @@
             <div class="form-group">
 
               <select formControlName="CategpryDdl" [(ngModel)]="selectedDropdownvalue" class="form-control"
-                (change)="changeCategorydata()">
-                <option value="undefined" selected disabled>Select option</option>
-                <option *ngFor="let item of CategoryList" [ngValue]="item">
+                (change)="courseSelectedValue()">
+                <option value="undefined" [selected]="selectedDropdownvalue === null" disabled>Select option</option>
+                <option *ngFor="let item of CategoryList" [ngValue]="item._id">
                   {{item.categoryName}}
                 </option>
               </select>
@@ -55,15 +55,16 @@
     <div class="col-md-8">
       <table class="table table-striped">
         <thead>
-          <th>Category Name</th>
-          <th>Sub Category </th>
+          <th> Category Name</th>
+          <th>Sub Category Name</th>
           <th>Sub Category </th>
           <th></th>
           <th></th>
         </thead>
         <tr *ngFor="let itmes of SubCategoryList">
-          <td> {{ itmes.categoryName }} </td>
-          <td> {{ itmes.categoryDescription }} </td>
+          <td> {{ itmes.subcategoryName }} </td>
+          <td> {{ itmes.subcategoryName }} </td>
+          <td> {{ itmes.subcategoryDescription }} </td>
           <td>
             <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="onEdit(itmes._id)"></i>
           </td>

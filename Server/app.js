@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 
 const userRoutes = require("./routes/user");
 const CategoryRoutes = require("./routes/category");
+const SubCategoryRoutes = require("./routes/sub-category");
 
 const app = express();
 
@@ -12,7 +13,8 @@ mongoose
   .connect(
     "mongodb+srv://manish:" +
       process.env.MONGO_ATLAS_PW +
-      "@cluster0-cxtx2.mongodb.net/nodeAngulardb",{ useNewUrlParser: true, useUnifiedTopology: true }
+      "@cluster0-cxtx2.mongodb.net/nodeAngulardb",
+    { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => {
     console.log("Connected to database!");
@@ -24,7 +26,6 @@ mongoose
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/images", express.static(path.join("images")));
-
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -39,10 +40,8 @@ app.use((req, res, next) => {
   next();
 });
 
-//app.use("/api/posts", postsRoutes);
+app.use("/api/subcategory", SubCategoryRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/category", CategoryRoutes);
-
-
 
 module.exports = app;

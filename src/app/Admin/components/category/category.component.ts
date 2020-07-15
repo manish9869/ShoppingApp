@@ -38,7 +38,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
 
   getCategoryList() {
-    this.categoryService.getCourseListdb();
+    this.categoryService.getCategoryListdb();
 
     this.categorysSub = this.categoryService
       .getCategoryUpdateListener()
@@ -73,6 +73,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
           this.resetForm();
 
           this.getCategoryList();
+          this.mode = 'create';
           this.toastr.info('Record updated succesfully');
         });
     }
@@ -102,11 +103,11 @@ export class CategoryComponent implements OnInit, OnDestroy {
             _id: result.categoryData._id,
             categoryName: result.categoryData.categoryName,
             categoryDescription: result.categoryData.categoryDescription,
-            IsActive:true,
-            EnteredBy:null,
-            WhenEntered:null,
-            ModifiedBy:null,
-            WhenModified:null
+            IsActive: true,
+            EnteredBy: null,
+            WhenEntered: null,
+            ModifiedBy: null,
+            WhenModified: null
           };
           this.form.setValue({
             CategoryName: this.Category.categoryName,
@@ -120,10 +121,10 @@ export class CategoryComponent implements OnInit, OnDestroy {
   }
 
   resetForm() {
-    if (this.form != null)
-
+    if (this.form != null) {
       this.form.reset();
-    this.getCategoryList();
+      this.getCategoryList();
+    }
   }
 
   ngOnDestroy() {

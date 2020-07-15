@@ -1,9 +1,11 @@
-const CategoryData = require("../models/category");
+const SubCategoryData = require("../models/sub-category");
 
-exports.insertCategory = (req, res, next) => {
-  const category = new CategoryData({
-    categoryName: req.body.categoryName,
-    categoryDescription: req.body.categoryDescription,
+exports.insertSubCategory = (req, res, next) => {
+  console.log(req.body);
+  const subcategory = new SubCategoryData({
+    categoryId: req.body.categoryId,
+    subcategoryName: req.body.subcategoryName,
+    subcategoryDescription: req.body.subcategoryDescription,
     IsActive: req.body.IsActive,
     EnteredBy: req.body.EnteredBy,
     WhenEntered: req.body.WhenEntered,
@@ -11,7 +13,7 @@ exports.insertCategory = (req, res, next) => {
     WhenModified: req.body.WhenModified,
   });
 
-  category
+  subcategory
     .save()
     .then((result) => {
       console.log(result);
@@ -28,30 +30,30 @@ exports.insertCategory = (req, res, next) => {
     });
 };
 
-exports.getAllCategory = (req, res, next) => {
-  const CategoryDataQuery = CategoryData.find();
+exports.getAllsubCategory = (req, res, next) => {
+  SubCategoryData.find()
+    .then((documents) => {
+      res.status(200).json({
+        message: "Categpry fetched successfully!",
+        subcategoryData: documents,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
 
-  CategoryDataQuery.then((documents) => {
-    res.status(200).json({
-      message: "Categpry fetched successfully!",
-      categoryData: documents,
+      res.status(500).json({
+        message: "Fetching Categpry failed!",
+      });
     });
-  }).catch((error) => {
-    console.log(error);
-
-    res.status(500).json({
-      message: "Fetching Categpry failed!",
-    });
-  });
 };
 
-exports.getSingleCategory = (req, res, next) => {
-  CategoryData.findById(req.params.id)
+exports.getSingleSubCategory = (req, res, next) => {
+  SubCategoryData.findById(req.params.id)
     .then((result) => {
       if (result) {
         res.status(200).json({
           message: "Categpry fetched successfully!",
-          categoryData: result,
+          subcategoryData: result,
         });
       } else {
         res.status(404).json({ message: "Category not found!" });
@@ -64,17 +66,19 @@ exports.getSingleCategory = (req, res, next) => {
     });
 };
 
-exports.updateCategory = (req, res, next) => {
-  const category = new CategoryData({
+exports.updateSubCategory = (req, res, next) => {
+  const subcategory = new SubCategoryData({
     _id: req.body._id,
-    categoryName: req.body.categoryName,
-    categoryDescription: req.body.categoryDescription,
+    categoryId: req.body.categoryId,
+    subcategoryName: req.body.subcategoryName,
+    subcategoryDescription: req.body.subcategoryDescription,
     ModifiedBy: req.body.ModifiedBy,
     WhenModified: req.body.WhenModified,
   });
-
-  CategoryData.updateOne({ _id: req.params.id }, category)
+  console.log(subcategory);
+  SubCategoryData.updateOne({ _id: req.params.id }, subcategory)
     .then((result) => {
+      console.log(result);
       if (result.nModified > 0) {
         res.status(200).json({ message: "Update successful!" });
       } else {
@@ -88,8 +92,8 @@ exports.updateCategory = (req, res, next) => {
     });
 };
 
-exports.deleteCategory = (req, res, next) => {
-  CategoryData.deleteOne({ _id: req.params.id })
+exports.deleteSubCategory = (req, res, next) => {
+  SubCategoryData.deleteOne({ _id: req.params.id })
     .then((result) => {
       console.log(result);
       if (result.n > 0) {

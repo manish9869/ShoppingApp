@@ -23,7 +23,7 @@ export class CategoryService {
       _id: null,
       categoryName: categoryName,
       categoryDescription: categoryDescrition,
-      IsActive:true,
+      IsActive: true,
       EnteredBy: null,
       WhenEntered: new Date(),
       ModifiedBy: null,
@@ -36,7 +36,7 @@ export class CategoryService {
     return this.categoryDataUpdated.asObservable();
   }
 
-  getCourseListdb() {
+  getCategoryListdb() {
     this.http
       .get<{ message: string; categoryData: any; }>(
         BACKEND_URL
@@ -61,7 +61,7 @@ export class CategoryService {
       _id: categoryid,
       categoryName: categoryName,
       categoryDescription: categoryDescrition,
-      IsActive:true,
+      IsActive: true,
       EnteredBy: null,
       WhenEntered: null,
       ModifiedBy: null,
