@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
 
 
 
-  menu: NavItem [] = [
+  menu: NavItem[] = [
     // {
     //   displayName: 'Category Managment',
     //   iconName: 'desktop_windows',
@@ -38,6 +38,11 @@ export class HeaderComponent implements OnInit {
           displayName: 'Sub Category',
           iconName: 'waves',
           route: '/admin/SubCategory'
+        },
+        {
+          displayName: 'Products',
+          iconName: 'waves',
+          route: '/admin/Product'
         }
       ]
     },

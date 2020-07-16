@@ -140,6 +140,7 @@ exports.deleteSubCategory = (req, res, next) => {
 // };
 
 exports.getAllCategpryandSubCategory = (req, res, next) => {
+  console.log("getAllCategpryandSubCategory");
   SubCategoryData.find()
     .populate("categoryId")
     .exec((documents, result) => {

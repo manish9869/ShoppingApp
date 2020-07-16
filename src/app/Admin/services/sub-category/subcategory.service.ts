@@ -57,8 +57,6 @@ export class SubCategoryService {
     return this.subcategoryDataUpdated.asObservable();
   }
 
-
-
   updateSubCategoryDb(subCategpryId: string, categoryid: string, SubCategoryName: string, SubCategoryDescription: string) {
     const subCategoryData: SubCategoryData = {
       _id: subCategpryId,
