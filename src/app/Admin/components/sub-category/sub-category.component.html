@@ -11,7 +11,10 @@
 
               <select formControlName="CategpryDdl" [(ngModel)]="selectedDropdownvalue" class="form-control"
                 (change)="courseSelectedValue()">
-                <option value="undefined" [selected]="selectedDropdownvalue === null" disabled>Select option</option>
+                <option value="undefined"
+                  [selected]="selectedDropdownvalue === null || selectedDropdownvalue === undefined || selectedDropdownvalue === ''"
+                  disabled>Select
+                  option</option>
                 <option *ngFor="let item of CategoryList" [ngValue]="item._id">
                   {{item.categoryName}}
                 </option>
@@ -62,7 +65,7 @@
           <th></th>
         </thead>
         <tr *ngFor="let itmes of SubCategoryList">
-          <td> {{ itmes.subcategoryName }} </td>
+          <td> {{ itmes.categoryId.categoryName }} </td>
           <td> {{ itmes.subcategoryName }} </td>
           <td> {{ itmes.subcategoryDescription }} </td>
           <td>

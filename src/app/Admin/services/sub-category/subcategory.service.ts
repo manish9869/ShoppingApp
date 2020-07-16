@@ -37,6 +37,8 @@ export class SubCategoryService {
         BACKEND_URL
       )
       .subscribe(result => {
+
+
         this.subcategoryData = result.subcategoryData;
         this.subcategoryDataUpdated.next({
           subcategoryData: [...this.subcategoryData]

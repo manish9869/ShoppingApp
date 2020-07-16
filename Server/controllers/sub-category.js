@@ -1,5 +1,7 @@
 const SubCategoryData = require("../models/sub-category");
 
+const CategoryData = require("../models/category");
+
 exports.insertSubCategory = (req, res, next) => {
   console.log(req.body);
   const subcategory = new SubCategoryData({
@@ -105,6 +107,46 @@ exports.deleteSubCategory = (req, res, next) => {
     .catch((error) => {
       res.status(500).json({
         message: "Deleting posts failed!",
+      });
+    });
+};
+
+// exports.getAllCategpryandSubCategory = (req, res, next) => {
+//   console.log("test");
+
+//   CategoryData.aggregate([
+//     {
+//       $lookup: {
+//         from: "subcategorydatas", // collection to join
+//         localField: "_id", //field from the input documents
+//         foreignField: "categoryId", //field from the documents of the "from" collection
+//         as: "subcategorydata", // output array field
+//       },
+//     },
+//   ])
+//     .then((documents) => {
+//       res.status(200).json({
+//         message: "Categpry fetched successfully!",
+//         categoryData: documents,
+//       });
+//     })
+//     .catch((error) => {
+//       console.log(error);
+
+//       res.status(500).json({
+//         message: "Fetching Categpry failed!",
+//       });
+//     });
+// };
+
+exports.getAllCategpryandSubCategory = (req, res, next) => {
+  SubCategoryData.find()
+    .populate("categoryId")
+    .exec((documents, result) => {
+      //  console.log(result);
+      res.status(200).json({
+        message: "Categpry fetched successfully!",
+        subcategoryData: result,
       });
     });
 };

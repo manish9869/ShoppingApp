@@ -67,8 +67,9 @@ export class SubCategoryComponent implements OnInit, OnDestroy {
       .getSubCategoryUpdateListener()
       .subscribe(result => {
 
-        console.log(result);
+
         this.SubCategoryList = result.subcategoryData;
+        console.log(this.SubCategoryList);
       });
   }
 
@@ -79,6 +80,7 @@ export class SubCategoryComponent implements OnInit, OnDestroy {
     if (this.form != null) {
       this.form.reset();
       this.getSubCategoryList();
+      this.selectedDropdownvalue = null;
     }
   }
 
