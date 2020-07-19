@@ -1,5 +1,7 @@
 const SubCategoryData = require("../models/sub-category");
 
+const CategoryData = require("../models/category");
+
 exports.insertSubCategory = (req, res, next) => {
   console.log(req.body);
   const subcategory = new SubCategoryData({

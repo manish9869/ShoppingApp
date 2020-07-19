@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post("/addsubcategory", SubcategoryController.insertSubCategory);
 
-router.get("", SubcategoryController.getAllsubCategory);
+//router.get("", SubcategoryController.getAllsubCategory);
 
 router.get("/:id", SubcategoryController.getSingleSubCategory);
 
@@ -15,5 +15,6 @@ router.put("/:id", SubcategoryController.updateSubCategory);
 router.delete("/:id", SubcategoryController.deleteSubCategory);
 
 router.post("/updateStatus/:id", SubcategoryController.updateStatus);
+router.get("", SubcategoryController.getAllCategpryandSubCategory);
 
 module.exports = router;
