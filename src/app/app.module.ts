@@ -1,7 +1,7 @@
 
 import { AngularMaterialModule } from './angular-material.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -11,12 +11,17 @@ import { AngularRoutingModule } from './app-routing.module';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ToastrModule } from 'ngx-toastr';
+import { TestingpageComponent } from './testing/testingpage/testingpage.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MainNavComponent,
+    TestingpageComponent,
 
   ],
   imports: [
@@ -27,9 +32,13 @@ import { ToastrModule } from 'ngx-toastr';
     AngularRoutingModule,
     LayoutModule,
     HttpClientModule,
+    DragDropModule,
+    NgxDropzoneModule,
     ToastrModule.forRoot()
 
 
+  ], schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [],
 
