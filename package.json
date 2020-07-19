@@ -37,6 +37,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.21",
     "mongoose-unique-validator": "^2.0.3",
+    "ngx-dropzone": "^2.2.2",
+    "ngx-dropzone-wrapper": "^9.0.0",
     "ngx-toastr": "^10.0.4",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",

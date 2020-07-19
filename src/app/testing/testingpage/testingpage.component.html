@@ -1,0 +1,20 @@
+<div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
+  <div class="example-box" cdkDrag *ngFor="let f of files">
+    <ngx-dropzone-image-preview class="example-box" [removable]="true" (removed)="onRemove(f)"
+      ngProjectAs="ngx-dropzone-preview" [file]="f">
+    </ngx-dropzone-image-preview>
+  </div>
+</div>
+
+
+
+<ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
+  <ngx-dropzone-label>
+    <div>
+      <h2>Upload images here</h2>
+    </div>
+  </ngx-dropzone-label>
+  <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true"
+    (removed)="onRemove(f)">
+  </ngx-dropzone-image-preview>
+</ngx-dropzone>
