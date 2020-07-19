@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { CategoryService } from "../../services/category/category.service";
 import { SubCategoryService } from "../../services/sub-category/subcategory.service";
 import { ToastrService } from "ngx-toastr";
+import { Subscription } from "rxjs/internal/Subscription";
+import { ProductService } from "../../services/product/product.service";
 
 @Component({
   selector: "app-product",
@@ -18,6 +20,8 @@ export class ProductComponent implements OnInit {
   SubCategoryList: any = [];
   FlavourList: any = [];
   form: FormGroup;
+  private categorysSub: Subscription;
+  private subCategorysSub: Subscription;
   private subCategoryid: string;
   private CategoryId: string;
   private ProductId: string;
@@ -26,6 +30,7 @@ export class ProductComponent implements OnInit {
   constructor(
     public categoryService: CategoryService,
     public subCategoryService: SubCategoryService,
+    public productServices: ProductService,
     public toastr: ToastrService
   ) {}
 
@@ -60,6 +65,28 @@ export class ProductComponent implements OnInit {
         validators: [Validators.required],
       }),
     });
+
+    this.categoryService.getActiveCategoryListdb();
+    this.categorysSub = this.categoryService
+      .getCategoryUpdateListener()
+      .subscribe((result) => {
+        this.CategoryList = result.categoryData;
+      });
+
+    this.FlavourList = [
+      "Chocolate Cakes",
+      "Blackforest Cakes",
+      "Truffle Cakes",
+      "Butterscotch Cakes",
+      "Vanilla Cakes",
+      "Red Velvet Cakes",
+      "Pineapple Cakes",
+      "Fruit Cakes",
+      "Coffee Cakes",
+      "Strawberry Cakes",
+      "Cheese Cakes",
+      "CakesExotic Cakes",
+    ];
   }
 
   get CategpryDropdownControl() {
@@ -81,12 +108,20 @@ export class ProductComponent implements OnInit {
     }
 
     if (this.mode === "create") {
+      this.productServices.saveProductsData();
     } else {
     }
   }
 
   CategorySelectedValue() {
     this.CategoryId = this.selectedCategoryDropdownvalue;
+    this.subCategoryService.getSubCategoryListdb();
+    this.subCategorysSub = this.subCategoryService
+      .getSubCategoryUpdateListener()
+      .subscribe((result) => {
+        console.log(result.subcategoryData);
+        this.SubCategoryList = result.subcategoryData;
+      });
   }
 
   SubCategorySelectedValue() {
