@@ -99,15 +99,11 @@
           <th></th>
         </thead>
         <tr *ngFor="let itmes of SubCategoryList">
-          <<<<<<< HEAD
-          <td>{{ itmes.subcategoryName }}</td>
-          <td>{{ itmes.subcategoryName }}</td>
-          <td>{{ itmes.subcategoryDescription }}</td>
-          =======
           <td>{{ itmes.categoryId.categoryName }}</td>
+
           <td>{{ itmes.subcategoryName }}</td>
           <td>{{ itmes.subcategoryDescription }}</td>
-          >>>>>>> a9f253efb9b9b6cefb391df6dfb277af0f4b6849
+
           <td>
             <mat-slide-toggle
               [checked]="itmes.IsActive"

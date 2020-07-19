@@ -1,14 +1,13 @@
-
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CategoryService } from '../../services/category/category.service';
-import { SubCategoryService } from '../../services/sub-category/subcategory.service';
-import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { CategoryService } from "../../services/category/category.service";
+import { SubCategoryService } from "../../services/sub-category/subcategory.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  selector: "app-product",
+  templateUrl: "./product.component.html",
+  styleUrls: ["./product.component.css"],
 })
 export class ProductComponent implements OnInit {
   private ProductList;
@@ -22,44 +21,45 @@ export class ProductComponent implements OnInit {
   private subCategoryid: string;
   private CategoryId: string;
   private ProductId: string;
-  private mode = 'create';
+  private mode = "create";
 
-  constructor(public categoryService: CategoryService, public subCategoryService: SubCategoryService, public toastr: ToastrService) { }
+  constructor(
+    public categoryService: CategoryService,
+    public subCategoryService: SubCategoryService,
+    public toastr: ToastrService
+  ) {}
 
   ngOnInit() {
-
-
     this.form = new FormGroup({
       ProductName: new FormControl(null, {
-        validators: [Validators.required, Validators.minLength(3)]
+        validators: [Validators.required, Validators.minLength(3)],
       }),
       ProductMRP: new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required],
       }),
       ProductWeight: new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required],
       }),
 
       SellingPrice: new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required],
       }),
       ProductDescription: new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required],
       }),
       Keywords: new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required],
       }),
       CategpryDdl: new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required],
       }),
       SubCategpryDdl: new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required],
       }),
       ProductFlvDdl: new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required],
       }),
     });
-
   }
 
   get CategpryDropdownControl() {
@@ -73,16 +73,16 @@ export class ProductComponent implements OnInit {
   get FlavourDropdownControl() {
     return this.form.controls;
   }
-  getProductList() {
-
-  }
+  getProductList() {}
 
   onSaveProduct() {
     if (this.form.invalid) {
       return;
     }
 
-    if (this.mode === 'create') { } else { }
+    if (this.mode === "create") {
+    } else {
+    }
   }
 
   CategorySelectedValue() {
@@ -93,11 +93,9 @@ export class ProductComponent implements OnInit {
     this.subCategoryid = this.selectedSubCategoryDropdownvalue;
   }
 
-  FlavourSelectedValue() { }
-
+  FlavourSelectedValue() {}
 
   resetForm() {
-
     if (this.form != null) {
       this.form.reset();
       this.getProductList();
@@ -107,12 +105,9 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  onDelete(productid: string) {
-
-  }
+  onDelete(productid: string) {}
   onEdit(productid: string) {
-    this.mode = 'edit';
+    this.mode = "edit";
     this.ProductId = productid;
-
   }
 }
