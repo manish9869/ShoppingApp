@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const userRoutes = require("./routes/user");
 const CategoryRoutes = require("./routes/category");
 const SubCategoryRoutes = require("./routes/sub-category");
+const ProductRoutes = require("./routes/product");
 
 const app = express();
 
@@ -25,7 +26,7 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use("/images", express.static(path.join("images")));
+app.use("/images", express.static(path.join("Server/images")));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -43,5 +44,6 @@ app.use((req, res, next) => {
 app.use("/api/subcategory", SubCategoryRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/category", CategoryRoutes);
+app.use("/api/product", ProductRoutes);
 
 module.exports = app;

@@ -5,6 +5,7 @@ import { SubCategoryService } from "../../services/sub-category/subcategory.serv
 import { ToastrService } from "ngx-toastr";
 import { Subscription } from "rxjs/internal/Subscription";
 import { ProductService } from "../../services/product/product.service";
+import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 
 @Component({
   selector: "app-product",
@@ -26,6 +27,7 @@ export class ProductComponent implements OnInit {
   private CategoryId: string;
   private ProductId: string;
   private mode = "create";
+  private flavor: string;
 
   constructor(
     public categoryService: CategoryService,
@@ -89,6 +91,21 @@ export class ProductComponent implements OnInit {
     ];
   }
 
+  files: File[] = [];
+
+  onSelect(event) {
+    this.files.push(...event.addedFiles);
+  }
+
+  onRemove(event) {
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+
+  drop(event: CdkDragDrop<{ name: string; poster: string }[]>) {
+    moveItemInArray(this.files, event.previousIndex, event.currentIndex);
+    console.log(this.files);
+  }
+
   get CategpryDropdownControl() {
     return this.form.controls;
   }
@@ -103,12 +120,38 @@ export class ProductComponent implements OnInit {
   getProductList() {}
 
   onSaveProduct() {
+    console.log(this.form.invalid);
     if (this.form.invalid) {
       return;
     }
-
     if (this.mode === "create") {
-      this.productServices.saveProductsData();
+      console.log("executing");
+
+      this.productServices
+        .saveProductsData(
+          this.CategoryId,
+          this.subCategoryid,
+          this.form.value.ProductName,
+          this.form.value.ProductDescription,
+          this.form.value.Keywords,
+          this.form.value.ProductMRP,
+          this.form.value.SellingPrice,
+          this.flavor,
+          this.form.value.ProductWeight,
+          this.files
+        )
+        .subscribe(
+          (result) => {
+            //this.resetForm();
+
+            //this.getSubCategoryList();
+            //this.selectedDropdownvalue = null;
+            this.toastr.success("New Record Inserted");
+          },
+          (error) => {
+            this.toastr.success("Erro");
+          }
+        );
     } else {
     }
   }
@@ -128,7 +171,9 @@ export class ProductComponent implements OnInit {
     this.subCategoryid = this.selectedSubCategoryDropdownvalue;
   }
 
-  FlavourSelectedValue() {}
+  FlavourSelectedValue() {
+    this.flavor = this.selectedFlvDropdownvalue;
+  }
 
   resetForm() {
     if (this.form != null) {

@@ -10,10 +10,10 @@ export interface ProductData {
   Flavor: string;
   Weight: string;
   ISCODAvailable: boolean;
+  Images: string[];
   IsActive: boolean;
   EnteredBy: string;
   WhenEntered: Date;
   ModifiedBy: string;
   WhenModified: Date;
-
 }

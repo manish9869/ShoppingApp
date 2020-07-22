@@ -34,7 +34,7 @@ exports.getAllCategory = (req, res, next) => {
 
   CategoryDataQuery.then((documents) => {
     res.status(200).json({
-      message: "Categpry fetched successfully!",
+      message: "Category fetched successfully!",
       categoryData: documents,
     });
   }).catch((error) => {
