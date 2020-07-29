@@ -10,6 +10,8 @@ router.post("/addsubcategory", SubcategoryController.insertSubCategory);
 
 router.get("/:id", SubcategoryController.getSingleSubCategory);
 
+router.get("/getByCategory/:id", SubcategoryController.getByCategory);
+
 router.put("/:id", SubcategoryController.updateSubCategory);
 
 router.delete("/:id", SubcategoryController.deleteSubCategory);

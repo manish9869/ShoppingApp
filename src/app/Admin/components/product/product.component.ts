@@ -6,6 +6,9 @@ import { ToastrService } from "ngx-toastr";
 import { Subscription } from "rxjs/internal/Subscription";
 import { ProductService } from "../../services/product/product.service";
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
+import { ProductData } from "../../services/product/product-data.model";
+import { HttpClient } from "@angular/common/http";
+import { map } from "rxjs/operators";
 
 @Component({
   selector: "app-product",
@@ -13,7 +16,10 @@ import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
   styleUrls: ["./product.component.css"],
 })
 export class ProductComponent implements OnInit {
-  private ProductList;
+  public http: HttpClient;
+  productData: ProductData;
+  ViewState = true;
+  ProductList;
   selectedCategoryDropdownvalue;
   selectedSubCategoryDropdownvalue;
   selectedFlvDropdownvalue;
@@ -23,6 +29,7 @@ export class ProductComponent implements OnInit {
   form: FormGroup;
   private categorysSub: Subscription;
   private subCategorysSub: Subscription;
+  private ProductSub: Subscription;
   private subCategoryid: string;
   private CategoryId: string;
   private ProductId: string;
@@ -89,9 +96,14 @@ export class ProductComponent implements OnInit {
       "Cheese Cakes",
       "CakesExotic Cakes",
     ];
+    this.getProductList();
   }
 
   files: File[] = [];
+
+  onNewProduct(event) {
+    this.ViewState = false;
+  }
 
   onSelect(event) {
     this.files.push(...event.addedFiles);
@@ -117,7 +129,15 @@ export class ProductComponent implements OnInit {
   get FlavourDropdownControl() {
     return this.form.controls;
   }
-  getProductList() {}
+  getProductList() {
+    this.productServices.getProductListdb();
+
+    this.ProductSub = this.productServices
+      .getProductUpdateListener()
+      .subscribe((result) => {
+        this.ProductList = result.productData;
+      });
+  }
 
   onSaveProduct() {
     console.log(this.form.invalid);
@@ -153,12 +173,39 @@ export class ProductComponent implements OnInit {
           }
         );
     } else {
+      //Updation part is here
+      this.productServices
+        .updateProductsData(
+          this.ProductId,
+          this.CategoryId,
+          this.subCategoryid,
+          this.form.value.ProductName,
+          this.form.value.ProductDescription,
+          this.form.value.Keywords,
+          this.form.value.ProductMRP,
+          this.form.value.SellingPrice,
+          this.flavor,
+          this.form.value.ProductWeight,
+          this.files
+        )
+        .subscribe(
+          (result) => {
+            //this.resetForm();
+
+            //this.getSubCategoryList();
+            //this.selectedDropdownvalue = null;
+            this.toastr.success("New Record Inserted");
+          },
+          (error) => {
+            this.toastr.success("Error");
+          }
+        );
     }
   }
 
   CategorySelectedValue() {
     this.CategoryId = this.selectedCategoryDropdownvalue;
-    this.subCategoryService.getSubCategoryListdb();
+    this.subCategoryService.getSubCategoryListByCategorydb(this.CategoryId);
     this.subCategorysSub = this.subCategoryService
       .getSubCategoryUpdateListener()
       .subscribe((result) => {
@@ -185,9 +232,83 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  onDelete(productid: string) {}
+  onDelete(productid: string) {
+    this.productServices.deleteProduct(productid).subscribe((result) => {
+      this.resetForm();
+      this.getProductList();
+      //this.selectedDropdownvalue = null;
+      this.toastr.error("Record Deleted succesfully");
+    });
+  }
   onEdit(productid: string) {
+    this.ViewState = false;
     this.mode = "edit";
     this.ProductId = productid;
+
+    this.productServices.getSingleProductdb(productid).subscribe(
+      (result) => {
+        console.log(result);
+        this.productData = {
+          _id: result.productData._id,
+          categoryId: result.productData.categoryId,
+          subcategoryId: result.productData.subcategoryId,
+          productName: result.productData.productName,
+          productDescription: result.productData.productDescription,
+          keywords: result.productData.keywords,
+          productMRPrice: result.productData.productMRPrice,
+          productSellingPrice: result.productData.productSellingPrice,
+          Flavor: result.productData.Flavor,
+          Weight: result.productData.Weight,
+          ISCODAvailable: result.productData.ISCODAvailable,
+          image: result.productData.image,
+          IsActive: true,
+          EnteredBy: null,
+          WhenEntered: null,
+          ModifiedBy: null,
+          WhenModified: null,
+        };
+        console.log(this.productData);
+        console.log(this.form);
+        this.form.setValue({
+          CategpryDdl: this.productData.categoryId,
+          SubCategpryDdl: this.productData.subcategoryId,
+          ProductName: this.productData.productName,
+          ProductMRP: this.productData.productMRPrice,
+          SellingPrice: this.productData.productSellingPrice,
+          ProductFlvDdl: this.productData.Flavor,
+          ProductWeight: this.productData.Weight,
+          ProductDescription: this.productData.productDescription,
+          Keywords: this.productData.keywords,
+        });
+
+        this.CategoryId = this.productData.categoryId;
+
+        //this.files = this.productData.Images;
+
+        this.subCategoryService.getSubCategoryListByCategorydb(this.CategoryId);
+        this.subCategorysSub = this.subCategoryService
+          .getSubCategoryUpdateListener()
+          .subscribe((result) => {
+            console.log(result.subcategoryData);
+            this.SubCategoryList = result.subcategoryData;
+          });
+
+        this.subCategoryid = this.productData.subcategoryId;
+        console.log(this.productData.image);
+        this.flavor = this.productData.Flavor;
+        this.productServices.getImage(productid).subscribe((res) => {
+          res.productImages.forEach((element) => {
+            //this.files.push(new File(element, "img.png"));
+          });
+
+          console.log("Filke list: " + res.productImages);
+        });
+      },
+      (error) => {}
+    );
+  }
+
+  onBack() {
+    this.ViewState = true;
   }
 }

@@ -10,7 +10,7 @@ export interface ProductData {
   Flavor: string;
   Weight: string;
   ISCODAvailable: boolean;
-  Images: string[];
+  image: Array<string>;
   IsActive: boolean;
   EnteredBy: string;
   WhenEntered: Date;

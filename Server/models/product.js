@@ -6,7 +6,7 @@ const ProductSchema = mongoose.Schema({
     required: true,
     ref: "CategoryData",
   },
-  subCategoryId: {
+  subcategoryId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "SubCategoryData",

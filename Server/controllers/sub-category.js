@@ -106,6 +106,19 @@ exports.getAllCategpryandSubCategory = (req, res, next) => {
     });
 };
 
+exports.getByCategory = (req, res, next) => {
+  SubCategoryData.find({ categoryId: req.params.id })
+    .populate("categoryId")
+    //.where("categoryId.isActivate" == true)
+    .exec((documents, result) => {
+      console.log(result);
+      res.status(200).json({
+        message: "Categpry fetched successfully!",
+        subcategoryData: result, //.find({ "categoryId.isActivate": true }),
+      });
+    });
+};
+
 exports.deleteSubCategory = (req, res, next) => {
   SubCategoryData.deleteOne({ _id: req.params.id })
     .then((result) => {

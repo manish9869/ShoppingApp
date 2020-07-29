@@ -8,13 +8,15 @@ router.post("/addproducts", extractFile, ProductController.addproducts);
 
 //router.get("", SubcategoryController.getAllsubCategory);
 
-// router.get("/:id", SubcategoryController.getSingleSubCategory);
+router.get("/:id", ProductController.getSingleProduct);
 
-// router.put("/:id", SubcategoryController.updateSubCategory);
+router.put("/:id", extractFile, ProductController.updateProduct);
 
-// router.delete("/:id", SubcategoryController.deleteSubCategory);
+router.delete("/:id", ProductController.deleteProduct);
 
 // router.post("/updateStatus/:id", SubcategoryController.updateStatus);
-// router.get("", SubcategoryController.getAllCategpryandSubCategory);
+router.get("", ProductController.getAllProducts);
+
+router.get("/singleproduct/:id", ProductController.getSingleProductImages);
 
 module.exports = router;

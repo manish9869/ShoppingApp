@@ -46,6 +46,19 @@ export class SubCategoryService {
       });
   }
 
+  getSubCategoryListByCategorydb(CategoryId: string) {
+    this.http
+      .get<{ message: string; subcategoryData: any }>(
+        BACKEND_URL + "/getByCategory/" + CategoryId
+      )
+      .subscribe((result) => {
+        this.subcategoryData = result.subcategoryData;
+        this.subcategoryDataUpdated.next({
+          subcategoryData: [...this.subcategoryData],
+        });
+      });
+  }
+
   getSingleSubCategorydb(id: string) {
     return this.http.get<{ message: string; subcategoryData: SubCategoryData }>(
       BACKEND_URL + "/" + id
