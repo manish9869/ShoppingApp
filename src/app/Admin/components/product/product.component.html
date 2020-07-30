@@ -279,7 +279,7 @@
 
     <div *ngIf="ViewState" class="col-md-12">
       <div class="row">
-        <div class="col-md-6">Total Records:{{ ProductList }}</div>
+        <div class="col-md-6">Total Records:{{ ProductCount }}</div>
         <div class="col-md-6" align="right">
           <a class="btn btn-primary" (click)="onNewProduct()">Add New</a>
         </div>
@@ -292,6 +292,7 @@
           <th>SubCategory Name</th>
           <th>MR Price</th>
           <th>Selling Price</th>
+          <th>Active</th>
           <th>Action</th>
           <th></th>
         </thead>
@@ -301,6 +302,12 @@
           <td>{{ itmes.subcategoryId.subcategoryName }}</td>
           <td>{{ itmes.productMRPrice }}</td>
           <td>{{ itmes.productSellingPrice }}</td>
+          <td>
+            <mat-slide-toggle
+              [checked]="itmes.IsActive"
+              (change)="onChange($event, itmes._id)"
+            ></mat-slide-toggle>
+          </td>
           <td>
             <i
               class="fa fa-pencil-square-o"

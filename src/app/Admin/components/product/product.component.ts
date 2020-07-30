@@ -9,6 +9,7 @@ import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import { ProductData } from "../../services/product/product-data.model";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
+import { MatSlideToggleChange } from "@angular/material";
 
 @Component({
   selector: "app-product",
@@ -20,6 +21,7 @@ export class ProductComponent implements OnInit {
   productData: ProductData;
   ViewState = true;
   ProductList;
+  ProductCount: string = "0";
   selectedCategoryDropdownvalue;
   selectedSubCategoryDropdownvalue;
   selectedFlvDropdownvalue;
@@ -136,7 +138,10 @@ export class ProductComponent implements OnInit {
       .getProductUpdateListener()
       .subscribe((result) => {
         this.ProductList = result.productData;
+        //console.log(this.ProductList);
+        this.ProductCount = this.ProductList.length;
       });
+    //
   }
 
   onSaveProduct() {
@@ -306,6 +311,21 @@ export class ProductComponent implements OnInit {
       },
       (error) => {}
     );
+  }
+
+  onChange($event: MatSlideToggleChange, productid: string) {
+    this.productServices
+      .UpdateProductStatus(productid, $event.checked)
+      .subscribe(
+        (result) => {
+          this.resetForm();
+
+          this.getProductList();
+
+          this.toastr.success("Status updated successfully.");
+        },
+        (error) => {}
+      );
   }
 
   onBack() {

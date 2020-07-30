@@ -141,4 +141,32 @@ export class ProductService {
       BACKEND_URL + "/singleproduct/" + id
     );
   }
+
+  UpdateProductStatus(productid: string, isActive: boolean) {
+    const postData = new FormData();
+    postData.append("id", productid);
+    postData.append("categoryId", "");
+    postData.append("subcategoryId", "");
+    postData.append("productName", "");
+    postData.append("productDescription", "");
+    postData.append("keywords", "");
+    postData.append("productMRPrice", "");
+    postData.append("productSellingPrice", "");
+    postData.append("Flavor", "");
+    postData.append("ISCODAvailable", "true");
+    postData.append("Weight", "");
+    postData.append("IsActive", isActive.toString());
+    postData.append("EnteredBy", "");
+    postData.append("WhenEntered", "");
+    postData.append("ModifiedBy", "");
+    postData.append("WhenModified", new Date().toString());
+
+    // for (let i = 0; i < images.length; i++) {
+    //   postData.append("image", images[i], images[i].name);
+    // }
+    return this.http.post(
+      BACKEND_URL + "/updateStatus" + "/" + productid,
+      postData
+    );
+  }
 }

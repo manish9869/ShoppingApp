@@ -14,7 +14,7 @@ router.put("/:id", extractFile, ProductController.updateProduct);
 
 router.delete("/:id", ProductController.deleteProduct);
 
-// router.post("/updateStatus/:id", SubcategoryController.updateStatus);
+router.post("/updateStatus/:id", extractFile, ProductController.updateStatus);
 router.get("", ProductController.getAllProducts);
 
 router.get("/singleproduct/:id", ProductController.getSingleProductImages);
