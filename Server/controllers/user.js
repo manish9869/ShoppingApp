@@ -30,8 +30,9 @@ exports.createUser = (req, res, next) => {
 };
 
 exports.loginUser = (req, res, next) => {
+  console.log(req.body);
   let fetchedUser;
-  User.findOne({ email: req.body.email })
+  UserData.findOne({ email: req.body.email })
     .then((user) => {
       if (!user) {
         return res.status(401).json({
@@ -39,9 +40,11 @@ exports.loginUser = (req, res, next) => {
         });
       }
       fetchedUser = user;
+      console.log("fetchedUser:" + fetchedUser);
       return bcrypt.compare(req.body.password, user.password);
     })
     .then((result) => {
+      console.log(result);
       if (!result) {
         return res.status(401).json({
           message: "Auth failed",

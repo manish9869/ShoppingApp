@@ -97,6 +97,7 @@ export class ProductComponent implements OnInit {
       "Strawberry Cakes",
       "Cheese Cakes",
       "CakesExotic Cakes",
+      "None",
     ];
     this.getProductList();
   }
@@ -167,7 +168,7 @@ export class ProductComponent implements OnInit {
         )
         .subscribe(
           (result) => {
-            //this.resetForm();
+            this.resetForm();
 
             //this.getSubCategoryList();
             //this.selectedDropdownvalue = null;
