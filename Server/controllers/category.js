@@ -1,11 +1,13 @@
 const CategoryData = require("../models/category");
 
 exports.insertCategory = (req, res, next) => {
-  console.log(req.body);
+  console.log(req);
+  const url = req.protocol + "://" + req.get("host");
   const category = new CategoryData({
     categoryName: req.body.categoryName,
     categoryDescription: req.body.categoryDescription,
     IsActive: req.body.IsActive,
+    image: url + "/images/" + req.files[0].filename,
     EnteredBy: req.body.EnteredBy,
     WhenEntered: req.body.WhenEntered,
     ModifiedBy: req.body.ModifiedBy,
@@ -83,16 +85,28 @@ exports.getSingleCategory = (req, res, next) => {
 };
 
 exports.updateCategory = (req, res, next) => {
+  console.log(req.body);
+
+  let image = req.body.image;
+  if (req.files) {
+    const url = req.protocol + "://" + req.get("host");
+    image = url + "/images/" + req.files[0].filename;
+  }
+
+  const url = req.protocol + "://" + req.get("host");
+
   const category = new CategoryData({
     _id: req.body._id,
     categoryName: req.body.categoryName,
     categoryDescription: req.body.categoryDescription,
+    image: image,
     ModifiedBy: req.body.ModifiedBy,
     WhenModified: req.body.WhenModified,
   });
 
   CategoryData.updateOne({ _id: req.params.id }, category)
     .then((result) => {
+      console.log(result);
       if (result.nModified > 0) {
         res.status(200).json({ message: "Update successful!" });
       } else {
@@ -100,6 +114,7 @@ exports.updateCategory = (req, res, next) => {
       }
     })
     .catch((error) => {
+      console.log(error);
       res.status(500).json({
         message: "Couldn't udpate post!",
       });

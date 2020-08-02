@@ -17,6 +17,7 @@ import { MatSlideToggleChange } from "@angular/material";
   styleUrls: ["./product.component.css"],
 })
 export class ProductComponent implements OnInit {
+
   public http: HttpClient;
   productData: ProductData;
   ViewState = true;
@@ -38,12 +39,14 @@ export class ProductComponent implements OnInit {
   private mode = "create";
   private flavor: string;
 
+
+
   constructor(
     public categoryService: CategoryService,
     public subCategoryService: SubCategoryService,
     public productServices: ProductService,
     public toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -310,7 +313,7 @@ export class ProductComponent implements OnInit {
           console.log("Filke list: " + res.productImages);
         });
       },
-      (error) => {}
+      (error) => { }
     );
   }
 
@@ -325,7 +328,7 @@ export class ProductComponent implements OnInit {
 
           this.toastr.success("Status updated successfully.");
         },
-        (error) => {}
+        (error) => { }
       );
   }
 

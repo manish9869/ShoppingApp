@@ -14,8 +14,6 @@ exports.addproducts = (req, res, next) => {
     files.push(url + "/images/" + req.files[items].filename);
   });
 
-  console.log(files);
-
   const productData = new ProductData({
     categoryId: req.body.categoryId,
     subcategoryId: req.body.subcategoryId,

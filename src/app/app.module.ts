@@ -14,24 +14,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { TestingpageComponent } from './testing/testingpage/testingpage.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
-import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
+
 import { AuthInterceptor } from './auth/auth-interceptor';
-
-
-let config = new AuthServiceConfig([
-  {
-    id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('Google-OAuth-Client-Id')
-  },
-  {
-    id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider('Facebook-App-Id')
-  }
-]);
-export function provideConfig() {
-  return config;
-}
 
 @NgModule({
   declarations: [
@@ -51,18 +35,13 @@ export function provideConfig() {
     HttpClientModule,
     DragDropModule,
     NgxDropzoneModule,
-
-    ToastrModule.forRoot(),
-    SocialLoginModule
+    ToastrModule.forRoot()
 
 
   ], schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [{
-    provide: AuthServiceConfig,
-    useFactory: provideConfig
-  }, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
 
   bootstrap: [AppComponent]
 })

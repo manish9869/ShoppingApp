@@ -1,48 +1,28 @@
 <div class="container" style="margin-top: 10px;">
   <div class="row">
     <div *ngIf="!ViewState" class="col-md-12">
-      <a class="btn btn-primary" (click)="onBack()">Back</a>
-      <form
-        class="form-horizontal"
-        [formGroup]="form"
-        (submit)="onSaveProduct()"
-      >
+      <button class="btn btn-primary" (click)="onBack()">Back</button>
+      <form class="form-horizontal" [formGroup]="form" (submit)="onSaveProduct()">
         <div class="form-group">
-          <label for="inputCourse" class="col-lg-6 control-label"
-            >Categpry Type</label
-          >
+          <label for="inputCourse" class="col-lg-6 control-label">Categpry Type</label>
           <div class="col-lg-12">
             <div class="form-group">
-              <select
-                formControlName="CategpryDdl"
-                [(ngModel)]="selectedCategoryDropdownvalue"
-                class="form-control"
-                (change)="CategorySelectedValue()"
-              >
-                <option
-                  value="undefined"
-                  [selected]="
+              <select formControlName="CategpryDdl" [(ngModel)]="selectedCategoryDropdownvalue" class="form-control"
+                (change)="CategorySelectedValue()">
+                <option value="undefined" [selected]="
                     selectedCategoryDropdownvalue === null ||
                     selectedCategoryDropdownvalue === undefined ||
                     selectedCategoryDropdownvalue === ''
-                  "
-                  disabled
-                  >Select option</option
-                >
+                  " disabled>Select option</option>
                 <option *ngFor="let item of CategoryList" [ngValue]="item._id">
                   {{ item.categoryName }}
                 </option>
               </select>
-              <div
-                *ngIf="
+              <div *ngIf="
                   CategpryDropdownControl.CategpryDdl.touched &&
                   CategpryDropdownControl.CategpryDdl.invalid
-                "
-                class="alert alert-danger"
-              >
-                <div
-                  *ngIf="CategpryDropdownControl.CategpryDdl.errors.required"
-                >
+                " class="alert alert-danger">
+                <div *ngIf="CategpryDropdownControl.CategpryDdl.errors.required">
                   Category is required.
                 </div>
               </div>
@@ -51,46 +31,27 @@
         </div>
 
         <div class="form-group">
-          <label for="inputCourse" class="col-lg-6 control-label"
-            >Sub Categpry Type</label
-          >
+          <label for="inputCourse" class="col-lg-6 control-label">Sub Categpry Type</label>
           <div class="col-lg-12">
             <div class="form-group">
-              <select
-                formControlName="SubCategpryDdl"
-                [(ngModel)]="selectedSubCategoryDropdownvalue"
-                class="form-control"
-                (change)="SubCategorySelectedValue()"
-              >
-                <option
-                  value="undefined"
-                  [selected]="
+              <select formControlName="SubCategpryDdl" [(ngModel)]="selectedSubCategoryDropdownvalue"
+                class="form-control" (change)="SubCategorySelectedValue()">
+                <option value="undefined" [selected]="
                     selectedSubCategoryDropdownvalue === null ||
                     selectedSubCategoryDropdownvalue === undefined ||
                     selectedSubCategoryDropdownvalue === ''
-                  "
-                  disabled
-                  >Select option</option
-                >
-                <option
-                  *ngFor="let item of SubCategoryList"
-                  [ngValue]="item._id"
-                >
+                  " disabled>Select option</option>
+                <option *ngFor="let item of SubCategoryList" [ngValue]="item._id">
                   {{ item.subcategoryName }}
                 </option>
               </select>
-              <div
-                *ngIf="
+              <div *ngIf="
                   SubCategpryDropdownControl.SubCategpryDdl.touched &&
                   SubCategpryDropdownControl.SubCategpryDdl.invalid
-                "
-                class="alert alert-danger"
-              >
-                <div
-                  *ngIf="
+                " class="alert alert-danger">
+                <div *ngIf="
                     SubCategpryDropdownControl.SubCategpryDdl.errors.required
-                  "
-                >
+                  ">
                   Sub Category is required.
                 </div>
               </div>
@@ -99,85 +60,46 @@
         </div>
 
         <div class="form-group">
-          <label for="inputCourse" class="col-lg-6 control-label"
-            >Product Name</label
-          >
+          <label for="inputCourse" class="col-lg-6 control-label">Product Name</label>
           <div class="col-lg-12">
-            <input
-              class="form-control"
-              formControlName="ProductName"
-              type="text"
-              placeholder="Product Name"
-              required
-            />
+            <input class="form-control" formControlName="ProductName" type="text" placeholder="Product Name" required />
           </div>
         </div>
 
         <div class="form-group">
-          <label for="inputCourse" class="col-lg-6 control-label"
-            >Product MRP</label
-          >
+          <label for="inputCourse" class="col-lg-6 control-label">Product MRP</label>
           <div class="col-lg-12">
-            <input
-              class="form-control"
-              formControlName="ProductMRP"
-              type="text"
-              placeholder="Product MRP"
-              required
-            />
+            <input class="form-control" formControlName="ProductMRP" type="text" placeholder="Product MRP" required />
           </div>
         </div>
         <div class="form-group">
-          <label for="inputCourse" class="col-lg-12 control-label"
-            >Product Selling Price</label
-          >
+          <label for="inputCourse" class="col-lg-12 control-label">Product Selling Price</label>
           <div class="col-lg-12">
-            <input
-              class="form-control"
-              formControlName="SellingPrice"
-              type="text"
-              placeholder="Product Selling Price"
-              required
-            />
+            <input class="form-control" formControlName="SellingPrice" type="text" placeholder="Product Selling Price"
+              required />
           </div>
         </div>
 
         <div class="form-group">
-          <label for="inputCourse" class="col-lg-6 control-label"
-            >Product Flavour</label
-          >
+          <label for="inputCourse" class="col-lg-6 control-label">Product Flavour</label>
           <div class="col-lg-12">
             <div class="form-group">
-              <select
-                formControlName="ProductFlvDdl"
-                [(ngModel)]="selectedFlvDropdownvalue"
-                class="form-control"
-                (change)="FlavourSelectedValue()"
-              >
-                <option
-                  value="undefined"
-                  [selected]="
+              <select formControlName="ProductFlvDdl" [(ngModel)]="selectedFlvDropdownvalue" class="form-control"
+                (change)="FlavourSelectedValue()">
+                <option value="undefined" [selected]="
                     selectedFlvDropdownvalue === null ||
                     selectedFlvDropdownvalue === undefined ||
                     selectedFlvDropdownvalue === ''
-                  "
-                  disabled
-                  >Select option</option
-                >
+                  " disabled>Select option</option>
                 <option *ngFor="let item of FlavourList" [ngValue]="item">
                   {{ item }}
                 </option>
               </select>
-              <div
-                *ngIf="
+              <div *ngIf="
                   FlavourDropdownControl.ProductFlvDdl.touched &&
                   FlavourDropdownControl.ProductFlvDdl.invalid
-                "
-                class="alert alert-danger"
-              >
-                <div
-                  *ngIf="FlavourDropdownControl.ProductFlvDdl.errors.required"
-                >
+                " class="alert alert-danger">
+                <div *ngIf="FlavourDropdownControl.ProductFlvDdl.errors.required">
                   Product Flavour is required.
                 </div>
               </div>
@@ -186,65 +108,37 @@
         </div>
 
         <div class="form-group">
-          <label for="inputCourse" class="col-lg-6 control-label"
-            >Product Weight</label
-          >
+          <label for="inputCourse" class="col-lg-6 control-label">Product Weight</label>
           <div class="col-lg-12">
-            <input
-              class="form-control"
-              formControlName="ProductWeight"
-              type="text"
-              placeholder="Product Weight"
-              required
-            />
+            <input class="form-control" formControlName="ProductWeight" type="text" placeholder="Product Weight"
+              required />
           </div>
         </div>
 
         <div class="form-group">
-          <label for="textArea" class="col-lg-12 control-label"
-            >Product Description</label
-          >
+          <label for="textArea" class="col-lg-12 control-label">Product Description</label>
           <div class="col-lg-12">
-            <textarea
-              class="form-control"
-              rows="3"
-              formControlName="ProductDescription"
-              type="text"
-              placeholder="Product Description"
-            ></textarea>
+            <textarea class="form-control" rows="3" formControlName="ProductDescription" type="text"
+              placeholder="Product Description"></textarea>
           </div>
         </div>
 
         <div class="form-group">
           <label for="textArea" class="col-lg-12 control-label">Keywords</label>
           <div class="col-lg-12">
-            <textarea
-              class="form-control"
-              rows="3"
-              formControlName="Keywords"
-              type="text"
-              placeholder="Keywords"
-            ></textarea>
+            <textarea class="form-control" rows="3" formControlName="Keywords" type="text"
+              placeholder="Keywords"></textarea>
           </div>
         </div>
 
         <div class="form-group">
           <label for="textArea" class="col-lg-12 control-label">Images</label>
           <div class="col-lg-12">
-            <div
-              cdkDropList
-              cdkDropListOrientation="horizontal"
-              class="example-list"
-              (cdkDropListDropped)="drop($event)"
-            >
+            <div cdkDropList cdkDropListOrientation="horizontal" class="example-list"
+              (cdkDropListDropped)="drop($event)">
               <div class="example-box" cdkDrag *ngFor="let f of files">
-                <ngx-dropzone-image-preview
-                  class="example-box"
-                  [removable]="true"
-                  (removed)="onRemove(f)"
-                  ngProjectAs="ngx-dropzone-preview"
-                  [file]="f"
-                >
+                <ngx-dropzone-image-preview class="example-box" [removable]="true" (removed)="onRemove(f)"
+                  ngProjectAs="ngx-dropzone-preview" [file]="f">
                 </ngx-dropzone-image-preview>
               </div>
             </div>
@@ -255,13 +149,8 @@
                   <h2>Upload images here</h2>
                 </div>
               </ngx-dropzone-label>
-              <ngx-dropzone-image-preview
-                ngProjectAs="ngx-dropzone-preview"
-                *ngFor="let f of files"
-                [file]="f"
-                [removable]="true"
-                (removed)="onRemove(f)"
-              >
+              <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f"
+                [removable]="true" (removed)="onRemove(f)">
               </ngx-dropzone-image-preview>
             </ngx-dropzone>
           </div>
@@ -281,7 +170,7 @@
       <div class="row">
         <div class="col-md-6">Total Records:{{ ProductCount }}</div>
         <div class="col-md-6" align="right">
-          <a class="btn btn-primary" (click)="onNewProduct()">Add New</a>
+          <button class="btn btn-primary" (click)="onNewProduct()">Add New</button>
         </div>
       </div>
       <br />
@@ -303,24 +192,13 @@
           <td>{{ itmes.productMRPrice }}</td>
           <td>{{ itmes.productSellingPrice }}</td>
           <td>
-            <mat-slide-toggle
-              [checked]="itmes.IsActive"
-              (change)="onChange($event, itmes._id)"
-            ></mat-slide-toggle>
+            <mat-slide-toggle [checked]="itmes.IsActive" (change)="onChange($event, itmes._id)"></mat-slide-toggle>
           </td>
           <td>
-            <i
-              class="fa fa-pencil-square-o"
-              aria-hidden="true"
-              (click)="onEdit(itmes._id)"
-            ></i>
+            <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="onEdit(itmes._id)"></i>
           </td>
           <td>
-            <i
-              class="fa fa-trash"
-              aria-hidden="true"
-              (click)="onDelete(itmes._id)"
-            ></i>
+            <i class="fa fa-trash" aria-hidden="true" (click)="onDelete(itmes._id)"></i>
           </td>
         </tr>
       </table>

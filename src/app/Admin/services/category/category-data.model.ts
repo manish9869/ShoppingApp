@@ -3,6 +3,7 @@ export interface CategoryData {
   categoryName: string;
   categoryDescription: string;
   IsActive: boolean;
+  image: string;
   EnteredBy: string;
   WhenEntered: Date;
   ModifiedBy: string;

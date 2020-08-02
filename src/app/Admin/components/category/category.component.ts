@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CategoryData } from '../../services/category/category-data.model';
 import { CategoryService } from '../../services/category/category.service';
 import { MatSlideToggleChange } from '@angular/material';
+import { mimeType } from './mime-type.validator';
 
 @Component({
   selector: 'app-category',
@@ -16,7 +17,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
     public categoryService: CategoryService,
     public toastr: ToastrService
   ) { }
-
+  imagePreview: string;
   private mode = 'create';
   Category: CategoryData;
   CategoryList: CategoryData[];
@@ -35,8 +36,25 @@ export class CategoryComponent implements OnInit, OnDestroy {
       CategoryDescription: new FormControl(null, {
         validators: [Validators.required],
       }),
+      image: new FormControl(null, {
+        validators: [Validators.required],
+        asyncValidators: [mimeType]
+      })
     });
   }
+
+
+  onImagePicked(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.form.patchValue({ image: file });
+    this.form.get('image').updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
+
 
   onChange($event: MatSlideToggleChange, Categoryid: string) {
 
@@ -73,7 +91,8 @@ export class CategoryComponent implements OnInit, OnDestroy {
       this.categoryService
         .createCategory(
           this.form.value.CategoryName,
-          this.form.value.CategoryDescription
+          this.form.value.CategoryDescription,
+          this.form.value.image
         )
         .subscribe(
           (result) => {
@@ -87,10 +106,11 @@ export class CategoryComponent implements OnInit, OnDestroy {
         );
     } else {
       this.categoryService
-        .updateCourseDb(
+        .updateCategoryDb(
           this.CategoryId,
           this.form.value.CategoryName,
-          this.form.value.CategoryDescription
+          this.form.value.CategoryDescription,
+          this.form.value.image
         )
         .subscribe((result) => {
           this.resetForm();
@@ -122,15 +142,20 @@ export class CategoryComponent implements OnInit, OnDestroy {
             categoryName: result.categoryData.categoryName,
             categoryDescription: result.categoryData.categoryDescription,
             IsActive: true,
+            image: result.categoryData.image,
             EnteredBy: null,
             WhenEntered: null,
             ModifiedBy: null,
             WhenModified: null
           };
+
           this.form.setValue({
             CategoryName: this.Category.categoryName,
-            CategoryDescription: this.Category.categoryDescription
+            CategoryDescription: this.Category.categoryDescription,
+            image: this.Category.image
           });
+          this.imagePreview = this.Category.image;
+
         },
         (error) => {
 

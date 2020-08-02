@@ -1,14 +1,14 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Router } from "@angular/router";
-import { UserSignupData } from "./signup-data.model";
-import { environment } from "src/environments/environment";
-import { UserLoginData } from "./login-data.model";
-import { Subject } from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { UserSignupData } from './signup-data.model';
+import { environment } from 'src/environments/environment';
+import { UserLoginData } from './login-data.model';
+import { Subject } from 'rxjs';
 
-const BACKEND_URL = environment.apiUrl + "/user";
+const BACKEND_URL = environment.apiUrl + '/user';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   private isAuthenticated = false;
   private token: string;
@@ -16,7 +16,7 @@ export class AuthService {
   private userId: string;
   private authStatusListener = new Subject<boolean>();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   getToken() {
     return this.token;
@@ -47,9 +47,9 @@ export class AuthService {
       name: username,
     };
 
-    this.http.post(BACKEND_URL + "/signup", UserSignupData).subscribe(
-      (result) => {},
-      (error) => {}
+    this.http.post(BACKEND_URL + '/signup', UserSignupData).subscribe(
+      (result) => { },
+      (error) => { }
     );
   }
 
@@ -58,7 +58,7 @@ export class AuthService {
 
     this.http
       .post<{ token: string; expiresIn: number; userId: string }>(
-        BACKEND_URL + "/login",
+        BACKEND_URL + '/login',
         authData
       )
       .subscribe(
@@ -78,7 +78,7 @@ export class AuthService {
             );
             console.log(expirationDate);
             this.saveAuthData(token, expirationDate, this.userId);
-            this.router.navigate(["/"]);
+            this.router.navigate(['/admin/Category']);
           }
         },
         (error) => {
@@ -94,26 +94,26 @@ export class AuthService {
     this.userId = null;
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
-    this.router.navigate(["/"]);
+    this.router.navigate(['/']);
   }
 
   private setAuthTimer(duration: number) {
-    console.log("Setting timer: " + duration);
+    console.log('Setting timer: ' + duration);
     this.tokenTimer = setTimeout(() => {
       this.logout();
     }, duration * 1000);
   }
 
   private saveAuthData(token: string, expirationDate: Date, userId: string) {
-    localStorage.setItem("token", token);
-    localStorage.setItem("expiration", expirationDate.toISOString());
-    localStorage.setItem("userId", userId);
+    localStorage.setItem('token', token);
+    localStorage.setItem('expiration', expirationDate.toISOString());
+    localStorage.setItem('userId', userId);
   }
 
   private clearAuthData() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("expiration");
-    localStorage.removeItem("userId");
+    localStorage.removeItem('token');
+    localStorage.removeItem('expiration');
+    localStorage.removeItem('userId');
   }
 
   autoAuthUser() {
@@ -133,9 +133,9 @@ export class AuthService {
   }
 
   private getAuthData() {
-    const token = localStorage.getItem("token");
-    const expirationDate = localStorage.getItem("expiration");
-    const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem('token');
+    const expirationDate = localStorage.getItem('expiration');
+    const userId = localStorage.getItem('userId');
     if (!token || !expirationDate) {
       return;
     }
