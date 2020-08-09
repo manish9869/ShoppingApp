@@ -16,6 +16,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { MenuComponent } from './Client/components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     HeaderComponent,
     MainNavComponent,
     TestingpageComponent,
-
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,14 +36,16 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     HttpClientModule,
     DragDropModule,
     NgxDropzoneModule,
-    ToastrModule.forRoot()
 
+    ToastrModule.forRoot(),
 
-  ], schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [
 
-  bootstrap: [AppComponent]
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
+
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

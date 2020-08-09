@@ -1,0 +1,350 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+
+* {
+  box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+
+.clear::after,
+.clear::before {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.col-md-1,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9 {
+  float: left;
+}
+
+.col-lg-1,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-md-1,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-sm-1,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-xs-1,
+.col-xs-10,
+.col-xs-11,
+.col-xs-12,
+.col-xs-2,
+.col-xs-3,
+.col-xs-4,
+.col-xs-5,
+.col-xs-6,
+.col-xs-7,
+.col-xs-8,
+.col-xs-9 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.Manu-container {
+  max-width: 1400px;
+  /* height: 100%; */
+  /* position: relative; */
+  padding: 15px 0 0px;
+  margin: 0 auto;
+}
+
+.clsMainMenu {
+  color: #676767;
+  font-size: 13px;
+}
+
+.clsTopMenu {
+  border: 1px solid;
+}
+
+.clsLogoContainer {
+  width: 15%;
+  float: left;
+}
+.clsSearchField > div {
+  margin: 0 1%;
+  padding: 7px 25px;
+}
+
+.clsSearchField {
+  width: 70%;
+  float: left;
+}
+
+.clsLogin {
+  width: 7%;
+  float: right;
+  margin-right: 15px;
+}
+
+.clsCart {
+  width: 5%;
+  float: right;
+}
+
+.clsGridCategories {
+  width: 20%;
+  float: left;
+  border: 1px solid #ccc;
+}
+
+.clsPinAvailability {
+  width: 25%;
+  float: left;
+  border: 1px solid #ccc;
+}
+
+.clsSearchProduct {
+  width: 40%;
+  float: right;
+  position: relative;
+  border: 1px solid #ccc;
+}
+.clsSearchProduct input {
+  width: 100%;
+  border: 0;
+}
+
+.clsSearchProduct button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+  height: 33px;
+  width: 33px;
+}
+
+.clsLabel {
+  float: left;
+}
+
+i.fa {
+  float: left;
+  margin-top: 3px;
+  margin-right: 8px;
+  color: #666666;
+}
+
+.badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  color: #fff;
+  vertical-align: middle;
+  background-color: #777;
+  border-radius: 10px;
+}
+
+.clsLogin {
+  color: #666666;
+  font-size: 13px;
+  padding: 6px 13px;
+  background: #efefef;
+}
+
+.clsCart {
+  color: #666666;
+  font-size: 13px;
+  padding: 6px 13px;
+  background: #efefef;
+}
+
+div.ruby-menu-demo-header {
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  z-index: 99999;
+}
+div.ruby-wrapper {
+  position: relative;
+  width: 100%;
+  height: 38px;
+  padding: 1px 0px;
+  margin: 0 auto;
+  background: #746cc1;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+.ruby-wrapper .visible-xs {
+  visibility: hidden;
+  position: absolute;
+}
+.nav-items {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+}
+div.ruby-wrapper ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+ul.ruby-menu > li {
+  float: left;
+  font-size: 11px;
+}
+.nav-items .nav-list {
+  display: inline-block;
+}
+ul.ruby-menu > li > a {
+  display: block;
+  line-height: 38px;
+  padding: 0 18px 0 12px;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+ul.ruby-menu > li > a:after {
+  font-family: "FontAwesome";
+  text-decoration: none;
+  content: "\f107";
+  position: absolute;
+  margin-left: 5px;
+}
+ul.ruby-menu > li > a:after {
+  transition: all 0.3s ease;
+}
+
+ul.ruby-menu > li.ruby-menu-mega > div,
+ul.ruby-menu > li.ruby-menu-mega-blog > div,
+ul.ruby-menu > li.ruby-menu-mega-shop > y div {
+  visibility: hidden;
+  opacity: 0;
+}
+
+ul.ruby-menu > li.ruby-menu-mega > div,
+ul.ruby-menu > li.ruby-menu-mega-blog > div,
+ul.ruby-menu > li.ruby-menu-mega-shop > div {
+  position: fixed;
+  width: 100%;
+  height: auto;
+  top: 103px;
+  padding-top: 15px;
+  left: 0;
+  background: #fff;
+  border-top: 4px solid #9ac92b;
+  overflow: hidden;
+  -webkit-box-shadow: 0 8px 24px -5px #ccc;
+  -moz-box-shadow: 0 8px 24px -5px #ccc;
+  box-shadow: 0 8px 24px -5px #ccc;
+}
+
+ul.ruby-menu > li > ul,
+ul.ruby-menu > li > div {
+  transform: translateY(25px);
+  transition: all 0.3s ease;
+}
+
+ul.ruby-menu > li:hover > ul,
+ul.ruby-menu > li:hover > div {
+  transform: translateY(0);
+}
+
+div.ruby-grid > div.ruby-row {
+  position: relative;
+  width: 100%;
+  height: auto;
+  text-align: left;
+}
+
+ul.ruby-menu > li > a:hover,
+ul.ruby-menu > li:hover > a,
+ul.ruby-menu > li.ruby-active-menu-item > a:hover,
+ul.ruby-menu > li.ruby-active-menu-item:hover > a {
+  background: #9ac92b;
+}
+
+ul.ruby-menu > li.ruby-menu-mega:hover > div,
+ul.ruby-menu > li.ruby-menu-mega-blog:hover > div,
+ul.ruby-menu > li.ruby-menu-mega-shop:hover > div {
+  visibility: visible;
+  opacity: 1;
+}
+
+h3.ruby-list-heading {
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 700;
+  margin: 0;
+  border-bottom: 1px dashed #d0d0d0;
+}
+
+.ruby-list-heading a {
+  color: #655cbf;
+}
+
+ul.ruby-menu > li.ruby-menu-mega > div ul,
+ul.ruby-menu > li.ruby-menu-mega-shop > div > ul > li > div ul {
+  margin: 0;
+  margin-top: 10px;
+}
+
+ul.ruby-menu > li.ruby-menu-mega > div ul li,
+ul.ruby-menu > li.ruby-menu-mega-shop > div > ul > li > div ul > li {
+  position: relative;
+  font-size: 14px;
+  line-height: 28px;
+  display: block;
+  width: 100%;
+}
+
+ul.ruby-menu > li.ruby-menu-mega > div ul li > a,
+ul.ruby-menu > li.ruby-menu-mega-shop > div > ul > li > div ul > li > a {
+  text-decoration: none;
+  color: #555;
+  display: inline-block;
+}

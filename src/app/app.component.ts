@@ -8,7 +8,7 @@ import { Component, OnInit } from "@angular/core";
 export class AppComponent implements OnInit {
   title = "PracticeProject";
 
-  IsAdminLogin = true;
+  IsAdminLogin = false;
   constructor(private authService: AuthService) {}
 
   ngOnInit() {

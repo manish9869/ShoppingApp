@@ -7,18 +7,25 @@
             <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <mat-list-item>
-                  <div fxLayout="row" fxLayoutAlign="space-between center" class="sideMenuText">
-                    <mat-icon>{{item.iconName}}</mat-icon>
-                    <span class="sideMenuText">{{item.displayName}}</span>
+                  <div
+                    fxLayout="row"
+                    fxLayoutAlign="space-between center"
+                    class="sideMenuText"
+                  >
+                    <mat-icon>{{ item.iconName }}</mat-icon>
+                    <span class="sideMenuText">{{ item.displayName }}</span>
                   </div>
                 </mat-list-item>
               </mat-expansion-panel-header>
               <span *ngFor="let child of item.children">
                 <mat-list-item [routerLink]="child.route">
-
-                  <div fxLayout="row" fxLayoutAlign="space-between center" class="sideMenuText">
-                    <mat-icon>{{child.iconName}}</mat-icon>
-                    {{child.displayName}}
+                  <div
+                    fxLayout="row"
+                    fxLayoutAlign="space-between center"
+                    class="sideMenuText"
+                  >
+                    <mat-icon>{{ child.iconName }}</mat-icon>
+                    {{ child.displayName }}
                   </div>
                 </mat-list-item>
               </span>
@@ -28,9 +35,13 @@
         <span *ngIf="!item.children || item.children.length === 0">
           <mat-list-item [routerLink]="item.route">
             <!-- Entradas principales -->
-            <div fxLayout="row" fxLayoutAlign="space-between center" class="sideMenuText">
-              <mat-icon>{{item.iconName}}</mat-icon>
-              {{item.displayName}}
+            <div
+              fxLayout="row"
+              fxLayoutAlign="space-between center"
+              class="sideMenuText"
+            >
+              <mat-icon>{{ item.iconName }}</mat-icon>
+              {{ item.displayName }}
             </div>
           </mat-list-item>
         </span>
@@ -44,7 +55,11 @@
       </button>
       My Application
       <span class="toolbar-spacer"></span>
-      <button mat-button [matMenuTriggerFor]="menulist">My Account</button>
+      <button *ngIf="isLoggedIn" mat-button (click)="this.authService.logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        Logout
+      </button>
+      <!-- <button mat-button [matMenuTriggerFor]="menulist">My Account</button>
       <mat-menu #menulist="matMenu" xPosition="before">
         <button mat-menu-item [matMenuTriggerFor]="SecondMenu">
           <mat-icon>account_box</mat-icon>
@@ -58,7 +73,7 @@
           <mat-icon>exit_to_app</mat-icon>
           Logout
         </button>
-      </mat-menu>
+      </mat-menu> -->
       <mat-menu #SecondMenu="matMenu">
         <button mat-menu-item>
           Sub Menu

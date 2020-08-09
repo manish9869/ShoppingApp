@@ -78,7 +78,7 @@ export class AuthService {
             );
             console.log(expirationDate);
             this.saveAuthData(token, expirationDate, this.userId);
-            this.router.navigate(['/admin/Category']);
+            this.router.navigate(["admin/Category"]);
           }
         },
         (error) => {
@@ -94,7 +94,7 @@ export class AuthService {
     this.userId = null;
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
-    this.router.navigate(['/']);
+    this.router.navigate(["/auth/login"]);
   }
 
   private setAuthTimer(duration: number) {
@@ -144,5 +144,13 @@ export class AuthService {
       expirationDate: new Date(expirationDate),
       userId: userId,
     };
+  }
+
+  isLoggedIn() {
+    const authInformation = this.getAuthData();
+    if (!authInformation) {
+      return false;
+    }
+    return true;
   }
 }
