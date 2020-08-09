@@ -10,7 +10,7 @@ const BACKEND_URL = environment.apiUrl + "/product";
 
 @Injectable({ providedIn: "root" })
 export class ProductService {
-  constructor(public http: HttpClient, public router: Router) {}
+  constructor(public http: HttpClient, public router: Router) { }
 
   private productData: ProductData[] = [];
   private productDataUpdated = new Subject<{
@@ -113,7 +113,7 @@ export class ProductService {
   }
 
   getProductListdb() {
-    this.http
+    return this.http
       .get<{ message: string; productData: any }>(BACKEND_URL)
       .subscribe((result) => {
         console.log(result);

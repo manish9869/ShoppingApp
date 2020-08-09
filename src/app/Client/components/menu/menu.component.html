@@ -2,15 +2,8 @@
   <div class="clsTopMenu">
     <div class="Manu-container clear">
       <div class="clsLogoContainer">
-        <a
-          class="logo scrollhide"
-          href="https://www.apnikirana.com/"
-          title="apnikirana"
-          ><img
-            src="https://www.apnikirana.com/images/logo.jpg"
-            alt="apnikirana"
-            class="icon icon-logo"
-        /></a>
+        <a class="logo scrollhide" href="https://www.apnikirana.com/" title="apnikirana"><img
+            src="https://www.apnikirana.com/images/logo.jpg" alt="apnikirana" class="icon icon-logo" /></a>
       </div>
       <div class="clsSearchField">
         <div class="clsGridCategories">
@@ -22,25 +15,14 @@
           <div class="clsLabel">Check Delivery Availablity</div>
         </div>
         <div class="clsSearchProduct">
-          <input
-            type="text"
-            name="term"
-            class="txt_search"
-            placeholder="Search for product..."
-          />
+          <input type="text" name="term" class="txt_search" placeholder="Search for product..." />
           <button type="submit" class="fa fa-search"></button>
         </div>
       </div>
       <div class="clsCart">
         <a href="cart">
           <i class="fa fa-shopping-bag"></i>
-          <span
-            id="cart_number"
-            class="badge"
-            style="background-color: #97c32d;"
-            >0</span
-          ></a
-        >
+          <span id="cart_number" class="badge" style="background-color: #97c32d;">0</span></a>
       </div>
       <div class="clsLogin">
         <a><i class="fa fa-user"></i> Login</a>
@@ -49,339 +31,42 @@
   </div>
   <div class="clsBottomMenu">
     <div class="ruby-menu-demo-header">
-      <!-- ########################### -->
-      <!-- START: RUBY HORIZONTAL MENU -->
+
       <div class="ruby-wrapper">
         <button class="c-hamburger c-hamburger--htx visible-xs">
           <span>toggle menu</span>
         </button>
         <div class="nav-items">
           <ul class="ruby-menu">
-            <!--<li class="ruby-active-menu-item"><a href="#">Home</a></li>-->
-            <li class="ruby-menu-mega nav-list">
-              <a href="Beverages">Beverages &amp; Snacks</a>
+
+
+            <li class="ruby-menu-mega nav-list" *ngFor="let Category of NavMenuCollection">
+              <a href="Personal-Care">{{Category.categoryName}}</a>
               <div class="ruby-grid ruby-grid-lined">
                 <div class="ruby-row">
-                  <div class="col-md-2">
+
+                  <div class="col-md-2" *ngFor="let subcategory of Category.subcategorydata">
                     <h3 class="ruby-list-heading">
-                      <a href="Cold-Drinks">Cold Drinks</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Juices-Drinks">Juices &amp; Drinks</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Milk-Drinks">Milk Drinks</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Namkeen-Snacks">Namkeen &amp; Snacks</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="TeaCoffee">Tea &amp; Coffee</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Water-Soda">Water &amp; Soda</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                </div>
-              </div>
-              <span class="ruby-dropdown-toggle"></span>
-            </li>
-            <li class="ruby-menu-mega nav-list">
-              <a href="Biscuits-Snacks-Chocolates">Biscuits &amp; Chocolates</a>
-              <div class="ruby-grid ruby-grid-lined">
-                <div class="ruby-row">
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Biscuits-Cookies">Biscuits &amp; Cookies</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Chocolates-Candies">Chocolates &amp; Candies</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                </div>
-              </div>
-              <span class="ruby-dropdown-toggle"></span>
-            </li>
-            <li class="ruby-menu-mega nav-list">
-              <a href="Breakfast-and-Dairy">Breakfast &amp; Dairy</a>
-              <div class="ruby-grid ruby-grid-lined">
-                <div class="ruby-row">
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Bakery-Items">Bakery Items</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Bread-and-Egg">Bread &amp; Egg</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Butter-Cheese">Butter &amp; Cheese</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Breakfast-Cereal-Mixes">Cereal &amp; Mixes</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Healthy-Snacks">Healthy Snacks</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Jams-Honey-Spreads">Jams, Honey &amp; Spreads</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Milk-and-Milk-Products"
-                        >Milk &amp; Milk Products</a
-                      >
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Paneer-and-Curd">Paneer &amp; Curd</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                </div>
-              </div>
-              <span class="ruby-dropdown-toggle"></span>
-            </li>
-            <li class="ruby-menu-mega nav-list">
-              <a href="CleaningsHousehold">Cleanings &amp; Household</a>
-              <div class="ruby-grid ruby-grid-lined">
-                <div class="ruby-row">
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Cleaners">Cleaners</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Dishwashers">Dishwashers</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Laundry-Detergents">Laundry Detergents</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Repellents">Repellents</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Tissues-Disposables"
-                        >Tissues &amp; Disposables</a
-                      >
-                    </h3>
-                    <ul></ul>
-                  </div>
-                </div>
-              </div>
-              <span class="ruby-dropdown-toggle"></span>
-            </li>
-            <li class="ruby-menu-mega nav-list">
-              <a href="Online-Fruits-Vegetable-Shopping"
-                >Fruits &amp; Vegetables</a
-              >
-              <div class="ruby-grid ruby-grid-lined">
-                <div class="ruby-row">
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Fresh-Fruits">Fresh Fruits</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Fresh-Vegetabels-Home-Delivery"
-                        >Fresh Vegetabels</a
-                      >
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Vegetable-Basket">Vegetable Basket</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                </div>
-              </div>
-              <span class="ruby-dropdown-toggle"></span>
-            </li>
-            <li class="ruby-menu-mega nav-list">
-              <a href="Online-Grocery-Staples-Home-Delivery"
-                >Grocery &amp; Staples</a
-              >
-              <div class="ruby-grid ruby-grid-lined">
-                <div class="ruby-row">
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Dry-Fruits-and-Nuts">Dry Fruits</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="FlourGrains">Flour</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Imported-Masala">Imported Masala</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Edible-Oils">Oil &amp; Ghee</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading"><a href="Papad">Papad</a></h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Pulses">Pulses</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Rice-and-Other-Grains">Rice &amp; Grains</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="SaltSugar">Salt &amp; Sugar</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Spices">Spices</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading"><a href="Wheat">Wheat</a></h3>
-                    <ul></ul>
-                  </div>
-                </div>
-              </div>
-              <span class="ruby-dropdown-toggle"></span>
-            </li>
-            <li class="nav-list">
-              <a href="Noodles-and-Sauces">Noodles &amp; Sauces</a>
-            </li>
-            <li class="ruby-menu-mega nav-list">
-              <a href="Personal-Care">Personal Care</a>
-              <div class="ruby-grid ruby-grid-lined">
-                <div class="ruby-row">
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Bath-Body">Bath &amp; Body</a>
+                      <a href="Bath-Body">{{subcategory.subcategoryName}}</a>
                     </h3>
                     <ul>
-                      <li><a href="Cold-Cream-">Cold Cream </a></li>
-                      <li><a href="Hair-Removal-">Hair Removal </a></li>
-                      <li>
-                        <a href="LotionMoisturise-">Lotion &amp; Moisturise </a>
+                      <li *ngFor="let product of subcategory.productdata">
+                        <a href="Cold-Cream-">{{ product.productName}} </a>
                       </li>
-                      <li>
-                        <a href="SoapsBody-Wash">Soaps &amp; Body Wash</a>
-                      </li>
-                      <li><a href="Talc-">Talc </a></li>
-                    </ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Feminine-Hygiene">Feminine Hygiene</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Hair-Care">Hair Care</a>
-                    </h3>
-                    <ul>
-                      <li><a href="Conditioner">Conditioner</a></li>
-                      <li><a href="Hair-Color">Hair Color</a></li>
-                      <li><a href="Hair-Oil-Serum">Hair Oil &amp; Serum</a></li>
-                      <li><a href="Shampoo">Shampoo</a></li>
-                    </ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="HandwashSanitizer">Handwash &amp; Sanitizer</a>
-                    </h3>
-                    <ul></ul>
-                  </div>
-                  <div class="col-md-2">
-                    <h3 class="ruby-list-heading">
-                      <a href="Oral-Care">Oral Care</a>
-                    </h3>
-                    <ul>
-                      <li><a href="Mouth-Wash">Mouth Wash</a></li>
-                      <li><a href="Tooth-Brush">Tooth Brush</a></li>
-                      <li><a href="Toothpaste">Toothpaste</a></li>
-                      <li><a href="Toothpowder">Toothpowder</a></li>
+
                     </ul>
                   </div>
                 </div>
               </div>
               <span class="ruby-dropdown-toggle"></span>
             </li>
+
+
+
           </ul>
         </div>
       </div>
-      <!-- END:   RUBY HORIZONTAL MENU -->
-      <!-- ########################### -->
+
     </div>
   </div>
 </div>

@@ -15,6 +15,8 @@ export class CategoryService {
   private categoryData: CategoryData[] = [];
   private categoryDataUpdated = new Subject<{ categoryData: CategoryData[] }>();
 
+  private categpryProductNav = new Subject<{ categoryData: any[] }>();
+
   createCategory(categoryName: string, categoryDescrition: string, image: File) {
 
 
@@ -142,4 +144,26 @@ export class CategoryService {
       categoryData
     );
   }
+
+
+
+  getActiveCatProductList() {
+    this.http
+      .get<{ message: string; categoryData: any }>(
+        BACKEND_URL + '/getCategpryProduct'
+      )
+      .subscribe((result) => {
+        this.categoryData = result.categoryData;
+        this.categpryProductNav.next({
+          categoryData: [...this.categoryData],
+        });
+      });
+  }
+
+
+  getCategoryProductUpdateListener() {
+    return this.categpryProductNav.asObservable();
+  }
+
+
 }

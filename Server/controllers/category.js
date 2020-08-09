@@ -164,3 +164,73 @@ exports.updateStatus = (req, res, next) => {
       });
     });
 };
+
+exports.getCategoryProduct = (req, res, next) => {
+  CategoryData.aggregate([
+    { $match: { IsActive: true } },
+    {
+      $lookup: {
+        from: "subcategorydatas",
+        let: { subcategoryId: "$_id" },
+        pipeline: [
+          {
+            $match: {
+              $expr: {
+                $and: [
+                  { $eq: ["$categoryId", "$$subcategoryId"] },
+                  { $eq: ["$IsActive", true] },
+                ],
+              },
+            },
+          },
+          {
+            $lookup: {
+              from: "productdatas",
+              let: { productId: "$_id" },
+              pipeline: [
+                {
+                  $match: {
+                    $expr: {
+                      $and: [
+                        {
+                          $eq: ["$subcategoryId", "$$productId"],
+                        },
+                        { $eq: ["$IsActive", true] },
+                      ],
+                    },
+                  },
+                },
+              ],
+              as: "productdata",
+            },
+          },
+        ],
+        as: "subcategorydata",
+      },
+    },
+    { $unwind: "$subcategorydata" },
+    {
+      $group: {
+        _id: "$_id",
+        categoryName: { $first: "$categoryName" },
+        categoryDescription: { $first: "$categoryDescription" },
+        IsActive: { $first: "$IsActive" },
+        subcategorydata: { $push: "$subcategorydata" },
+      },
+    },
+    { $sort: { categoryName: 1 } },
+  ])
+    .then((documents) => {
+      res.status(200).json({
+        message: "Categpry fetched successfully!",
+        categoryData: documents,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+
+      res.status(500).json({
+        message: "Fetching Categpry failed!",
+      });
+    });
+};

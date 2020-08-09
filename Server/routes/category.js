@@ -8,6 +8,7 @@ const router = express.Router();
 router.post("/addcategory", extractFile, categoryController.insertCategory);
 
 router.get("", categoryController.getAllCategory);
+router.get("/getCategpryProduct", categoryController.getCategoryProduct);
 
 router.get("/getActiveCategories", categoryController.getActiveCategory);
 
